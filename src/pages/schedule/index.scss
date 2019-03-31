@@ -1,0 +1,13 @@
+.schedule-wrapper {
+  .tab-bar {
+    display: flex;
+    .tab {
+      flex: 1;
+      text-align: center;
+    }
+    .current {
+      font-weight: bold;
+      color: red;
+    }
+  }
+}

@@ -1,9 +1,9 @@
 {
   "extends": ["taro", "standard"],
   "rules": {
-    "no-unused-vars": ["warn", { "varsIgnorePattern": "Taro" }],
+    "no-unused-vars": ["off", { "varsIgnorePattern": "Taro" }],
     "react/jsx-filename-extension": [
-      1,
+      "warn",
       { "extensions": [".js", ".jsx", ".tsx"] }
     ]
   },
