@@ -1,10 +1,10 @@
-export type Weekday = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
+export type TWeekday = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
 
-export type ViewMode = 'TaskView' | 'WeekView'
+export type TViewMode = 'TaskView' | 'WeekView'
 
 export interface ITask {
   name: string
-  weekday: Weekday
+  weekday: TWeekday
   startTime: Date
   endTime: Date
   tomatoBonus: number
@@ -12,5 +12,11 @@ export interface ITask {
 
 export interface ITab {
   name: string
-  viewMode: ViewMode
+  viewMode: TViewMode
+}
+
+export interface IDay {
+  weekdayName: string
+  weekday: TWeekday
+  date?: string
 }

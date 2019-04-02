@@ -1,0 +1,16 @@
+.week-view {
+  .header {
+    display: flex;
+    .header-left {
+      flex: 1;
+    }
+    .header-right {
+      flex: 7;
+      display: flex;
+      .header-right-column {
+        flex: 1;
+        color: black;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
-import Index from './pages/index'
+import 'taro-icons/scss/FontAwesome.scss'
 
+import Index from './pages/index'
 import './app.scss'
 
 class App extends Taro.Component {
@@ -40,7 +41,7 @@ class App extends Taro.Component {
       ],
       color: 'black',
       selectedColor: 'red',
-      backgroundColor: 'white',
+      backgroundColor: '#eeeeee',
       borderStyle: 'white'
     }
   }
