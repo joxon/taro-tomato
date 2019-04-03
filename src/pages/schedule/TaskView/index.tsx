@@ -16,28 +16,55 @@ export default class TaskView extends Component<IProps, {}> {
     recentWeekdays: []
   }
 
+  navigateToTaskAdd () {
+    Taro.navigateTo({ url: './taskAdd' })
+  }
+
+  navigateToTaskEdit () {
+    Taro.navigateTo({ url: './taskEdit' })
+  }
+
   render () {
+    const vTaskEmpty = (
+      <View className='task-empty' onClick={this.navigateToTaskAdd}>
+        <View>目前没有任务哦</View>
+        <View>快去添加一个吧！</View>
+      </View>
+    )
+
+    // const vTaskNone = (
+    //   <View className='task-item task-none' onClick={this.navigateToTaskAdd}>
+    //     <Text>{'<空>'}</Text>
+    //   </View>
+    // )
+
     const { tasks, recentWeekdays } = this.props
+
     return (
       <View className='task-view-wrapper'>
-        {tasks.length === 0 ? (
-          <View className='task-empty'>
-            <Text>目前没有任务哦，快去添加一个吧！</Text>
-          </View>
-        ) : (
-          recentWeekdays.map(day => (
+        {tasks.length === 0
+          ? vTaskEmpty
+          : recentWeekdays.map(day => (
             <View className='task-weekday-wrapper' key={day.weekday}>
               <Text>
-                {`${day.date} ${day.weekdayName} ${day.weekday} `}
-                {day.weekday === recentWeekdays[0].weekday ? '今天' : ''}
-                {day.weekday === recentWeekdays[1].weekday ? '明天' : ''}
-                {day.weekday === recentWeekdays[2].weekday ? '后天' : ''}
+                {`${day.date} ${day.weekdayName} ${
+                  day.weekday === recentWeekdays[0].weekday
+                    ? '今天'
+                    : day.weekday === recentWeekdays[1].weekday
+                      ? '明天'
+                      : day.weekday === recentWeekdays[2].weekday
+                        ? '后天'
+                        : ''
+                }`}
               </Text>
 
               {tasks.filter(task => task.weekday === day.weekday).length ===
-              0 ? (
-                  <View className='task-item'>
-                    <Text>这天没有任务哦</Text>
+                0 ? ( // vTaskNone
+                  <View
+                    className='task-item task-none'
+                    onClick={this.navigateToTaskAdd}
+                  >
+                    <Text>{'<空>'}</Text>
                   </View>
                 ) : (
                   tasks.map(task =>
@@ -45,8 +72,14 @@ export default class TaskView extends Component<IProps, {}> {
                       <View
                         className='task-item'
                         key={task.weekday + task.startHour + task.name}
+                        onClick={this.navigateToTaskEdit}
                       >
-                        <Text>{task.name}</Text>
+                        <View>{task.name}</View>
+                        <View>
+                          {`${
+                            task.startHour.includes('AM') ? '上午' : '下午'
+                          } ${task.startHour.slice(0, 2)}:${task.startMinute}`}
+                        </View>
                       </View>
                     ) : (
                       ''
@@ -54,8 +87,7 @@ export default class TaskView extends Component<IProps, {}> {
                   )
                 )}
             </View>
-          ))
-        )}
+          ))}
       </View>
     )
   }

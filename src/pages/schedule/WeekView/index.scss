@@ -8,6 +8,7 @@
 
   .header {
     display: flex;
+    font-size: small;
 
     .header-left {
       flex: 1;
@@ -27,16 +28,18 @@
   }
 
   .content {
-    top: 100rpx;
+    top: 80rpx;
     bottom: 1px;
     overflow: auto;
 
     .content-row {
       display: flex;
+      height: 10%;
 
       .time-cell {
         flex: 1;
-        font-size: small;
+        font-size: 20rpx;
+        text-align: end;
         color: darkgray;
         border-right: 1px solid black;
       }
@@ -51,7 +54,8 @@
           border-bottom: 1px solid darkgray;
 
           .task-card {
-            font-size: smaller;
+            height: 100%;
+            font-size: 30rpx;
             color: white;
             background: lightcoral;
           }

@@ -54,24 +54,24 @@ export default class WeekView extends Component<IProps, {}> {
   }
 
   readonly ROWS_HOUR: THour[] = [
-    '6AM',
-    '7AM',
-    '8AM',
-    '9AM',
-    '10AM',
-    '11AM',
-    '12PM',
-    '1PM',
-    '2PM',
-    '3PM',
-    '4PM',
-    '5PM',
-    '6PM',
-    '7PM',
-    '8PM',
-    '9PM',
-    '10PM',
-    '11PM'
+    ' 6 AM',
+    ' 7 AM',
+    ' 8 AM',
+    ' 9 AM',
+    '10 AM',
+    '11 AM',
+    '12 PM',
+    ' 1 PM',
+    ' 2 PM',
+    ' 3 PM',
+    ' 4 PM',
+    ' 5 PM',
+    ' 6 PM',
+    ' 7 PM',
+    ' 8 PM',
+    ' 9 PM',
+    '10 PM',
+    '11 PM'
   ]
 
   readonly COLS_WDAY: TWeekday[] = [
@@ -93,14 +93,14 @@ export default class WeekView extends Component<IProps, {}> {
           <View className='header-right'>
             {WEEKDAYS.map(wDay => (
               <View className='header-right-column' key={wDay.weekday}>
-                <Text>{wDay.weekdayName}</Text>
-                <Text>
+                <View>{wDay.weekdayName}</View>
+                <View>
                   {
                     recentWeekdays.filter(
                       rDay => rDay.weekday === wDay.weekday
                     )[0].date
                   }
-                </Text>
+                </View>
               </View>
             ))}
           </View>

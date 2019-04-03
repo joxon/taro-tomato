@@ -21,28 +21,28 @@ const defaultState: IState = {
     {
       name: '写作业',
       weekday: 'Sat',
-      startHour: '8AM',
-      endHour: '10AM',
-      startMinute: '0',
-      endMinute: '0',
+      startHour: ' 8 AM',
+      endHour: '10 AM',
+      startMinute: '00',
+      endMinute: '00',
       tomatoBonus: 10
     },
     {
       name: '读书',
       weekday: 'Sat',
-      startHour: '11AM',
-      endHour: '11AM',
-      startMinute: '0',
+      startHour: '11 AM',
+      endHour: '11 AM',
+      startMinute: '00',
       endMinute: '30',
       tomatoBonus: 10
     },
     {
       name: '篮球班',
       weekday: 'Sat',
-      startHour: '3PM',
-      endHour: '5PM',
-      startMinute: '0',
-      endMinute: '0',
+      startHour: ' 3 PM',
+      endHour: ' 5 PM',
+      startMinute: '00',
+      endMinute: '00',
       tomatoBonus: 10
     }
   ]
@@ -51,7 +51,7 @@ const defaultState: IState = {
 export default class Schedule extends Component<{}, IState> {
   state: IState = defaultState
 
-  readonly tabs: ITab[] = [
+  readonly TABS: ITab[] = [
     { name: '日程视图', viewMode: 'TaskView' },
     { name: '一周视图', viewMode: 'WeekView' }
   ]
@@ -104,13 +104,17 @@ export default class Schedule extends Component<{}, IState> {
     }
   }
 
+  navigateToTaskAdd () {
+    Taro.navigateTo({ url: 'taskAdd' })
+  }
+
   render () {
     const { viewMode, tasks } = this.state
-    const { tabs, recentWeekdays } = this
+    const { recentWeekdays } = this
     return (
       <View className='schedule-wrapper'>
         <View className='tab-bar'>
-          {tabs.map((tab, index) => (
+          {this.TABS.map((tab, index) => (
             <View
               className={viewMode === tab.viewMode ? 'tab current' : 'tab'}
               onClick={this.handleViewSwitching}
@@ -131,7 +135,7 @@ export default class Schedule extends Component<{}, IState> {
           </View>
         </View>
 
-        <View className='add-button'>
+        <View className='add-button' onClick={this.navigateToTaskAdd}>
           <FontAwesome
             family='solid'
             name='plus-circle'

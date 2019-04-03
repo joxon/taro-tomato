@@ -15,6 +15,8 @@ class App extends Taro.Component {
     },
     pages: [
       'pages/schedule/index',
+      'pages/schedule/taskAdd',
+      'pages/schedule/taskEdit',
       'pages/tomato/index',
       'pages/dynamics/index'
     ],

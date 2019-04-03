@@ -13,13 +13,14 @@
       flex: 1;
       text-align: center;
       padding: 10rpx;
-      border-bottom: 1px solid black;
+      border-bottom: 10rpx solid black;
+      z-index: 2;
     }
 
     .current {
       font-weight: bold;
       color: red;
-      border-bottom: 1px solid red;
+      border-bottom: 10rpx solid red;
     }
   }
 
@@ -38,9 +39,10 @@
     float: right;
     bottom: 30rpx;
     right: 30rpx;
+
     background-color: #ffffff;
     border: 0 solid #ffffff;
     border-radius: 500px;
-    box-shadow: 4px 1px 1px #cccccc;
+    box-shadow: 5px 5px 10px #cccccc;
   }
 }
