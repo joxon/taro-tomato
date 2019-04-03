@@ -38,20 +38,26 @@ export default class TaskView extends Component<IProps, {}> {
               {tasks.filter(task => task.weekday === day.weekday).length ===
               0 ? (
                   <View className='task-item'>
-                    <Text>今天没有任务哦</Text>
+                    <Text>这天没有任务哦</Text>
                   </View>
                 ) : (
-                  tasks
-                    .filter(task => task.weekday === day.weekday)
-                    .map((task, taskIdx) => (
-                      <View className='task-item' key={taskIdx}>
+                  tasks.map(task =>
+                    task.weekday === day.weekday ? (
+                      <View
+                        className='task-item'
+                        key={task.weekday + task.startHour + task.name}
+                      >
                         <Text>{task.name}</Text>
                       </View>
-                    ))
+                    ) : (
+                      ''
+                    )
+                  )
                 )}
             </View>
           ))
         )}
+
         <View className='add-button'>
           <FontAwesome
             family='solid'

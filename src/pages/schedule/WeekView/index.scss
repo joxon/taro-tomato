@@ -1,15 +1,61 @@
 .week-view {
+  .header,
+  .content {
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
   .header {
     display: flex;
+
     .header-left {
       flex: 1;
+      border-bottom: 1px solid black;
     }
+
     .header-right {
       flex: 7;
       display: flex;
+      border-bottom: 1px solid black;
+
       .header-right-column {
         flex: 1;
-        color: black;
+        text-align: center;
+      }
+    }
+  }
+
+  .content {
+    top: 100rpx;
+    bottom: 1px;
+    overflow: auto;
+
+    .content-row {
+      display: flex;
+
+      .time-cell {
+        flex: 1;
+        font-size: small;
+        color: darkgray;
+        border-right: 1px solid black;
+      }
+
+      .tasks-row {
+        flex: 7;
+        display: flex;
+
+        .task-cell {
+          flex: 1;
+          border-right: 1px solid darkgray;
+          border-bottom: 1px solid darkgray;
+
+          .task-card {
+            font-size: smaller;
+            color: white;
+            background: lightcoral;
+          }
+        }
       }
     }
   }

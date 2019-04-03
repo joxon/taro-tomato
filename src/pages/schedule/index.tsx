@@ -19,51 +19,29 @@ const defaultState: IState = {
   tasks: [
     {
       name: '写作业',
-      weekday: 'Mon',
-      startTime: new Date(),
-      endTime: new Date(),
+      weekday: 'Sat',
+      startHour: '8AM',
+      endHour: '10AM',
+      startMinute: '0',
+      endMinute: '0',
       tomatoBonus: 10
     },
     {
       name: '读书',
-      weekday: 'Tue',
-      startTime: new Date(),
-      endTime: new Date(),
+      weekday: 'Sat',
+      startHour: '11AM',
+      endHour: '11AM',
+      startMinute: '0',
+      endMinute: '30',
       tomatoBonus: 10
     },
     {
       name: '篮球班',
-      weekday: 'Wed',
-      startTime: new Date(),
-      endTime: new Date(),
-      tomatoBonus: 10
-    },
-    {
-      name: '篮球班',
-      weekday: 'Thu',
-      startTime: new Date(),
-      endTime: new Date(),
-      tomatoBonus: 10
-    },
-    {
-      name: '篮球班',
-      weekday: 'Mon',
-      startTime: new Date(),
-      endTime: new Date(),
-      tomatoBonus: 10
-    },
-    {
-      name: '篮球班',
-      weekday: 'Tue',
-      startTime: new Date(),
-      endTime: new Date(),
-      tomatoBonus: 10
-    },
-    {
-      name: '篮球班',
-      weekday: 'Sun',
-      startTime: new Date(),
-      endTime: new Date(),
+      weekday: 'Sat',
+      startHour: '3PM',
+      endHour: '5PM',
+      startMinute: '0',
+      endMinute: '0',
       tomatoBonus: 10
     }
   ]
@@ -90,7 +68,7 @@ export default class Schedule extends Component<{}, IState> {
 
       const daysMonth = d.getMonth() + 1 // getMonth返回0-11
       const daysDay = d.getDate() // getDate返回1-31
-      day.date = `${daysMonth}月${daysDay}日`
+      day.date = `${daysMonth}-${daysDay}`
       weekdays.push(day)
 
       d.setDate(d.getDate() + 1)
