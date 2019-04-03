@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { FontAwesome } from 'taro-icons'
 
 import { TWeekday, TViewMode, ITask, ITab, IDay } from './index.d'
 import TaskView from './TaskView'
@@ -128,6 +129,15 @@ export default class Schedule extends Component<{}, IState> {
           <View hidden={viewMode !== 'WeekView'}>
             <WeekView tasks={tasks} recentWeekdays={recentWeekdays} />
           </View>
+        </View>
+
+        <View className='add-button'>
+          <FontAwesome
+            family='solid'
+            name='plus-circle'
+            size={50}
+            color='#ff0000'
+          />
         </View>
       </View>
     )

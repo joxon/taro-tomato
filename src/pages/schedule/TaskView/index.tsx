@@ -1,6 +1,5 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
-import { FontAwesome } from 'taro-icons'
 
 import { ITask, IDay } from '../index.d'
 import './index.scss'
@@ -57,15 +56,6 @@ export default class TaskView extends Component<IProps, {}> {
             </View>
           ))
         )}
-
-        <View className='add-button'>
-          <FontAwesome
-            family='solid'
-            name='plus-circle'
-            size={50}
-            color='#ff0000'
-          />
-        </View>
       </View>
     )
   }

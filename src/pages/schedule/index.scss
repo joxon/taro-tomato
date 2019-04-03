@@ -32,4 +32,15 @@
     // 关键代码！可以让content区域出现滚动条而不是整个page区域滚动，配合bottom:1px使用！
     overflow: auto;
   }
+
+  .add-button {
+    position: fixed;
+    float: right;
+    bottom: 30rpx;
+    right: 30rpx;
+    background-color: #ffffff;
+    border: 0 solid #ffffff;
+    border-radius: 500px;
+    box-shadow: 4px 1px 1px #cccccc;
+  }
 }

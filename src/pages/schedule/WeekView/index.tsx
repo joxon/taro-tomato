@@ -3,6 +3,7 @@ import { View, Text } from '@tarojs/components'
 
 import { ITask, IDay, TWeekday, THour } from '../index.d'
 import WEEKDAYS from '../WEEKDAYS'
+import './index.scss'
 
 interface IProps {
   tasks: ITask[]
@@ -53,12 +54,6 @@ export default class WeekView extends Component<IProps, {}> {
   }
 
   readonly ROWS_HOUR: THour[] = [
-    // '0AM',
-    // '1AM',
-    // '2AM',
-    // '3AM',
-    // '4AM',
-    // '5AM',
     '6AM',
     '7AM',
     '8AM',
