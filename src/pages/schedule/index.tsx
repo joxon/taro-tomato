@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { AtTabs, AtTabsPane } from 'taro-ui'
 import { FontAwesome } from 'taro-icons'
 
 // import {
@@ -9,26 +10,32 @@ import { FontAwesome } from 'taro-icons'
 //   FontAwesome,
 // } from 'taro-icons'
 
-import { TWeekday, TViewMode, ITask, ITab, IDay } from './index.d'
+import { TWeekday, ITask, IDay, ITab } from './index.d'
 import TaskView from './components/TaskView'
 import WeekView from './components/WeekView'
 import WEEKDAYS from './constants/WEEKDAYS'
+
 import './index.scss'
+
+enum EViewMode {
+  'TaskView' = 0,
+  'WeekView' = 1
+}
 
 interface IState {
   today: TWeekday
-  viewMode: TViewMode
+  viewMode: EViewMode
   tasks: ITask[]
 }
 
 const defaultState: IState = {
   today: 'Mon',
-  viewMode: 'TaskView',
+  viewMode: EViewMode.TaskView,
   tasks: [
     {
       name: '写作业',
       weekday: 'Sat',
-      startHour: ' 8 AM',
+      startHour: '08 AM',
       endHour: '10 AM',
       startMinute: '00',
       endMinute: '00',
@@ -46,8 +53,8 @@ const defaultState: IState = {
     {
       name: '篮球班',
       weekday: 'Sat',
-      startHour: ' 3 PM',
-      endHour: ' 5 PM',
+      startHour: '03 PM',
+      endHour: '05 PM',
       startMinute: '00',
       endMinute: '00',
       tomatoBonus: 10
@@ -58,10 +65,7 @@ const defaultState: IState = {
 export default class Schedule extends Component<{}, IState> {
   state: IState = defaultState
 
-  readonly TABS: ITab[] = [
-    { name: '日程视图', viewMode: 'TaskView' },
-    { name: '一周视图', viewMode: 'WeekView' }
-  ]
+  readonly TABLIST: ITab[] = [{ title: '日程视图' }, { title: '一周视图' }]
 
   recentWeekdays: IDay[]
 
@@ -100,13 +104,13 @@ export default class Schedule extends Component<{}, IState> {
 
   handleViewSwitching () {
     const { viewMode } = this.state
-    if (viewMode === 'TaskView') {
+    if (viewMode === EViewMode.TaskView) {
       this.setState({
-        viewMode: 'WeekView'
+        viewMode: EViewMode.WeekView
       })
     } else {
       this.setState({
-        viewMode: 'TaskView'
+        viewMode: EViewMode.TaskView
       })
     }
   }
@@ -121,27 +125,18 @@ export default class Schedule extends Component<{}, IState> {
 
     return (
       <View className='schedule-wrapper'>
-        <View className='tab-bar'>
-          {this.TABS.map((tab, index) => (
-            <View
-              className={viewMode === tab.viewMode ? 'tab current' : 'tab'}
-              onClick={this.handleViewSwitching}
-              key={index}
-            >
-              {tab.name}
-            </View>
-          ))}
-        </View>
-
-        <View className='view-wrapper'>
-          <View hidden={viewMode !== 'TaskView'}>
+        <AtTabs
+          current={viewMode}
+          tabList={this.TABLIST}
+          onClick={this.handleViewSwitching}
+        >
+          <AtTabsPane current={viewMode} index={0}>
             <TaskView tasks={tasks} recentWeekdays={recentWeekdays} />
-          </View>
-
-          <View hidden={viewMode !== 'WeekView'}>
+          </AtTabsPane>
+          <AtTabsPane current={viewMode} index={1}>
             <WeekView tasks={tasks} recentWeekdays={recentWeekdays} />
-          </View>
-        </View>
+          </AtTabsPane>
+        </AtTabs>
 
         <View className='add-button' onClick={this.navigateToTaskAdd}>
           <FontAwesome

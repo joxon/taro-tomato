@@ -1,39 +1,4 @@
 .schedule-wrapper {
-  .tab-bar,
-  .view-wrapper {
-    position: absolute;
-    left: 0;
-    right: 0;
-  }
-
-  .tab-bar {
-    display: flex;
-
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 10rpx;
-      border-bottom: 10rpx solid black;
-      z-index: 2;
-    }
-
-    .current {
-      font-weight: bold;
-      color: red;
-      border-bottom: 10rpx solid red;
-    }
-  }
-
-  .view-wrapper {
-    // 留出头部导航栏的高度，头部多高这里就多高
-    top: 70rpx;
-    // 这里之所以设置1px是因为如果不设置将不会有头部‘悬浮固定’效果，头部将会随页面一起滚动，
-    // 设置了1px以后滚动条只出现在content区域，从而模拟悬浮固定效果
-    bottom: 1px;
-    // 关键代码！可以让content区域出现滚动条而不是整个page区域滚动，配合bottom:1px使用！
-    overflow: auto;
-  }
-
   .add-button {
     position: fixed;
     float: right;

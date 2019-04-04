@@ -1,4 +1,4 @@
-.task-view-wrapper {
+.task-view {
   padding: 10rpx 10rpx;
   background-color: rgb(243, 243, 243);
 
@@ -12,34 +12,15 @@
     border-radius: 50rpx;
   }
 
-  .task-weekday-wrapper {
+  .task-weekday {
+    padding-left: 10rpx;
+    padding-top: 10rpx;
+
     color: gray;
     font-size: small;
-    text-align: center;
 
     .task-card {
-      margin: 20rpx auto;
-      padding: 50rpx 30rpx;
-
-      color: white;
-      background-color: salmon;
-      font-size: large;
-      text-align: start;
-
-      border-top-left-radius: none;
-      border-top-right-radius: 50rpx;
-      border-bottom-right-radius: 50rpx;
-      border-bottom-left-radius: 50rpx;
-
-      box-shadow: 0 5rpx 5rpx 0 rgba(0, 0, 0, 0.4);
-      transition: 0.3s;
-    }
-
-    .task-none {
-      color: darkgray;
-      background-color: white;
-      text-align: center;
-      border: 1rpx dashed darkgray;
+      padding: 10rpx 10rpx;
     }
   }
 }

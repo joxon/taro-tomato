@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
+import { AtCard } from 'taro-ui'
 
 import { ITask, IDay } from '../../index.d'
 import TaskCard from '../components/TaskCard'
@@ -23,10 +24,10 @@ export default class TaskView extends Component<IProps, {}> {
 
   render () {
     const vTaskEmpty = (
-      <View className='task-empty' onClick={this.navigateToTaskAdd}>
+      <AtCard className='task-empty' onClick={this.navigateToTaskAdd}>
         <View>目前没有任务哦</View>
         <View>快去添加一个吧！</View>
-      </View>
+      </AtCard>
     )
 
     // const vTaskNone = (
@@ -38,11 +39,11 @@ export default class TaskView extends Component<IProps, {}> {
     const { tasks, recentWeekdays } = this.props
 
     return (
-      <View className='task-view-wrapper'>
+      <View className='task-view'>
         {tasks.length === 0
           ? vTaskEmpty
           : recentWeekdays.map(day => (
-            <View className='task-weekday-wrapper' key={day.weekday}>
+            <View className='task-weekday' key={day.weekday}>
               <Text>
                 {`${day.date} ${day.weekdayName} ${
                   day.weekday === recentWeekdays[0].weekday
@@ -61,7 +62,7 @@ export default class TaskView extends Component<IProps, {}> {
                     className='task-card task-none'
                     onClick={this.navigateToTaskAdd}
                   >
-                    {'<空>'}
+                    <AtCard>{'<空>'}</AtCard>
                   </View>
                 ) : (
                   tasks.map(task =>

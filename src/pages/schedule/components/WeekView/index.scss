@@ -1,13 +1,7 @@
 .week-view {
-  .header,
-  .content {
-    position: absolute;
-    left: 0;
-    right: 0;
-  }
+  background-color: rgb(243, 243, 243);
 
   .header {
-    margin-top: 10rpx;
     display: flex;
     font-size: small;
 
@@ -35,13 +29,9 @@
   }
 
   .content {
-    top: 90rpx;
-    bottom: 1px;
-    overflow: auto;
-
     .content-row {
       display: flex;
-      height: 10%;
+      height: 100rpx;
 
       .time-cell {
         flex: 1;
@@ -54,11 +44,12 @@
       .tasks-row {
         flex: 7;
         display: flex;
+        background-color: white;
 
         .task-cell {
           flex: 1;
-          border-right: 1px solid darkgray;
-          border-bottom: 1px solid darkgray;
+          border-right: 1px dashed darkgray;
+          border-bottom: 1px dashed darkgray;
 
           .task-card {
             height: 100%;

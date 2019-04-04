@@ -3,7 +3,6 @@ import { View, Picker, Text } from '@tarojs/components'
 import { AtButton, AtForm, AtInput, AtInputNumber } from 'taro-ui'
 
 import { TWeekday, THour, TMinute } from './index.d'
-import TaskFormFields from './components/TaskFormFields'
 import './taskDetails.scss'
 
 import DEFAULT_TASK from './constants/TASK'

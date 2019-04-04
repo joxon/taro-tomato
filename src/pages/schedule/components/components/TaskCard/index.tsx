@@ -1,5 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { AtCard } from 'taro-ui'
 
 import { ITask } from './../../../index.d'
 import DEFAULT_TASK from '../../../constants/TASK'
@@ -21,14 +22,21 @@ export default class index extends Component<IProps, {}> {
 
   render () {
     const { task, showStartTime } = this.props
-    return (
-      <View onClick={this.navigateToTaskEdit}>
-        <View>{task.name}</View>
-        <View hidden={!showStartTime}>
+    return showStartTime ? (
+      <AtCard
+        title={task.name}
+        extra={`+${task.tomatoBonus}`}
+        onClick={this.navigateToTaskEdit}
+      >
+        <View>
           {`${
             task.startHour.includes('AM') ? '上午' : '下午'
           } ${task.startHour.slice(0, 2)}:${task.startMinute}`}
         </View>
+      </AtCard>
+    ) : (
+      <View onClick={this.navigateToTaskEdit}>
+        <View>{task.name}</View>
       </View>
     )
   }

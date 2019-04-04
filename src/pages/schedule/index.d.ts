@@ -1,4 +1,4 @@
-export type TViewMode = 'TaskView' | 'WeekView'
+// export type TViewMode = 'TaskView' | 'WeekView'
 
 export type TWeekday = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
 
@@ -106,8 +106,7 @@ export interface ITask {
 }
 
 export interface ITab {
-  name: string
-  viewMode: TViewMode
+  title: string
 }
 
 export interface IDay {
