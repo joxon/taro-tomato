@@ -1,7 +1,8 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 
-import { ITask, IDay } from '../index.d'
+import { ITask, IDay } from '../../index.d'
+import TaskCard from '../components/TaskCard'
 import './index.scss'
 
 interface IProps {
@@ -17,11 +18,7 @@ export default class TaskView extends Component<IProps, {}> {
   }
 
   navigateToTaskAdd () {
-    Taro.navigateTo({ url: './taskAdd' })
-  }
-
-  navigateToTaskEdit () {
-    Taro.navigateTo({ url: './taskEdit' })
+    Taro.navigateTo({ url: './taskDetails?mode=add' })
   }
 
   render () {
@@ -61,25 +58,19 @@ export default class TaskView extends Component<IProps, {}> {
               {tasks.filter(task => task.weekday === day.weekday).length ===
                 0 ? ( // vTaskNone
                   <View
-                    className='task-item task-none'
+                    className='task-card task-none'
                     onClick={this.navigateToTaskAdd}
                   >
-                    <Text>{'<空>'}</Text>
+                    {'<空>'}
                   </View>
                 ) : (
                   tasks.map(task =>
                     task.weekday === day.weekday ? (
                       <View
-                        className='task-item'
+                        className='task-card'
                         key={task.weekday + task.startHour + task.name}
-                        onClick={this.navigateToTaskEdit}
                       >
-                        <View>{task.name}</View>
-                        <View>
-                          {`${
-                            task.startHour.includes('AM') ? '上午' : '下午'
-                          } ${task.startHour.slice(0, 2)}:${task.startMinute}`}
-                        </View>
+                        <TaskCard task={task} showStartTime />
                       </View>
                     ) : (
                       ''

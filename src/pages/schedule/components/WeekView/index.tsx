@@ -1,8 +1,9 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 
-import { ITask, IDay, TWeekday, THour } from '../index.d'
-import WEEKDAYS from '../WEEKDAYS'
+import { ITask, IDay, TWeekday, THour } from '../../index.d'
+import WEEKDAYS from '../../constants/WEEKDAYS'
+import TaskCard from '../components/TaskCard'
 import './index.scss'
 
 interface IProps {
@@ -54,22 +55,22 @@ export default class WeekView extends Component<IProps, {}> {
   }
 
   readonly ROWS_HOUR: THour[] = [
-    ' 6 AM',
-    ' 7 AM',
-    ' 8 AM',
-    ' 9 AM',
+    '06 AM',
+    '07 AM',
+    '08 AM',
+    '09 AM',
     '10 AM',
     '11 AM',
     '12 PM',
-    ' 1 PM',
-    ' 2 PM',
-    ' 3 PM',
-    ' 4 PM',
-    ' 5 PM',
-    ' 6 PM',
-    ' 7 PM',
-    ' 8 PM',
-    ' 9 PM',
+    '01 PM',
+    '02 PM',
+    '03 PM',
+    '04 PM',
+    '05 PM',
+    '06 PM',
+    '07 PM',
+    '08 PM',
+    '09 PM',
     '10 PM',
     '11 PM'
   ]
@@ -92,7 +93,14 @@ export default class WeekView extends Component<IProps, {}> {
           <View className='header-left' />
           <View className='header-right'>
             {WEEKDAYS.map(wDay => (
-              <View className='header-right-column' key={wDay.weekday}>
+              <View
+                className={`header-right-column ${
+                  wDay.weekday === recentWeekdays[0].weekday
+                    ? 'header-today'
+                    : 'header-not-today'
+                }`}
+                key={wDay.weekday}
+              >
                 <View>{wDay.weekdayName}</View>
                 <View>
                   {
@@ -120,7 +128,7 @@ export default class WeekView extends Component<IProps, {}> {
                           className='task-card'
                           key={wday + hour + task.name}
                         >
-                          {task.name}
+                          <TaskCard task={task} showStartTime={false} />
                         </View>
                       ) : (
                         ''

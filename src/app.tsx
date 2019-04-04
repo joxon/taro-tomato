@@ -1,5 +1,16 @@
 import Taro from '@tarojs/taro'
-import 'taro-icons/scss/FontAwesome.scss'
+
+// https://github.com/Jeepeng/taro-icons#readme
+// import 'taro-icons/scss/MaterialIcons.scss' // 112KB
+// import 'taro-icons/scss/MaterialCommunityIcons.scss' // 495KB
+// import 'taro-icons/scss/Ionicons.scss' // 134KB
+import 'taro-icons/scss/FontAwesome.scss' // 322KB
+
+// https://nervjs.github.io/taro-ui-theme-preview/
+// https://taro-ui.aotu.io/#/docs/introduction
+// https://taro-ui.aotu.io/#/docs/customizetheme
+// import 'taro-ui/dist/style/index.scss' // 默认样式
+import './static/styles/custom-theme.scss' // 自定义样式
 
 import Index from './pages/index'
 import './app.scss'
@@ -15,8 +26,7 @@ class App extends Taro.Component {
     },
     pages: [
       'pages/schedule/index',
-      'pages/schedule/taskAdd',
-      'pages/schedule/taskEdit',
+      'pages/schedule/taskDetails',
       'pages/tomato/index',
       'pages/dynamics/index'
     ],

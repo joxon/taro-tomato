@@ -2,10 +2,17 @@ import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { FontAwesome } from 'taro-icons'
 
+// import {
+//   MaterialIcons,
+//   MaterialCommunityIcons,
+//   Ionicons,
+//   FontAwesome,
+// } from 'taro-icons'
+
 import { TWeekday, TViewMode, ITask, ITab, IDay } from './index.d'
-import TaskView from './TaskView'
-import WeekView from './WeekView'
-import WEEKDAYS from './WEEKDAYS'
+import TaskView from './components/TaskView'
+import WeekView from './components/WeekView'
+import WEEKDAYS from './constants/WEEKDAYS'
 import './index.scss'
 
 interface IState {
@@ -105,12 +112,13 @@ export default class Schedule extends Component<{}, IState> {
   }
 
   navigateToTaskAdd () {
-    Taro.navigateTo({ url: 'taskAdd' })
+    Taro.navigateTo({ url: 'taskDetails?mode=add' })
   }
 
   render () {
     const { viewMode, tasks } = this.state
     const { recentWeekdays } = this
+
     return (
       <View className='schedule-wrapper'>
         <View className='tab-bar'>
@@ -139,11 +147,16 @@ export default class Schedule extends Component<{}, IState> {
           <FontAwesome
             family='solid'
             name='plus-circle'
-            size={50}
+            size={40}
             color='#ff0000'
           />
         </View>
       </View>
     )
   }
+  // <MaterialIcons name='add-circle' size={50} color='#ff0000' />
+  // <MaterialIcons name='settings' size={24} color='#000000' />
+  // <MaterialCommunityIcons name='account' size={32} color='#000000' />
+  // <Ionicons name='ios-woman' size={32} color='pink' />
+  // <FontAwesome family='brands' name='weixin' size={32} />
 }

@@ -1,4 +1,4 @@
-import { IDay } from './index.d'
+import { IDay } from '../index.d'
 
 const WEEKDAYS: IDay[] = [
   {

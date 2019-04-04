@@ -7,6 +7,7 @@
   }
 
   .header {
+    margin-top: 10rpx;
     display: flex;
     font-size: small;
 
@@ -24,11 +25,17 @@
         flex: 1;
         text-align: center;
       }
+
+      .header-today {
+        border-radius: 60%;
+        background-color: salmon;
+        color: white;
+      }
     }
   }
 
   .content {
-    top: 80rpx;
+    top: 90rpx;
     bottom: 1px;
     overflow: auto;
 

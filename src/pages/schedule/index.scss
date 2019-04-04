@@ -41,8 +41,10 @@
     right: 30rpx;
 
     background-color: #ffffff;
-    border: 0 solid #ffffff;
-    border-radius: 500px;
-    box-shadow: 5px 5px 10px #cccccc;
+    border: 1px solid #ffffff;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px #000000a0;
+
+    z-index: 2;
   }
 }

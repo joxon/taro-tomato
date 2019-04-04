@@ -28,7 +28,8 @@
     "nerv-devtools": "^1.3.13",
     "nervjs": "^1.3.13",
     "react": "^16.8.6",
-    "taro-icons": "^0.3.0"
+    "taro-icons": "^0.3.0",
+    "taro-ui": "^2.0.2"
   },
   "devDependencies": {
     "@tarojs/plugin-babel": "1.2.22",
