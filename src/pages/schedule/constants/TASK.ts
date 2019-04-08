@@ -3,9 +3,9 @@ import { ITask } from '../index.d'
 const TASK_DEFAULT: ITask = {
   name: '',
   weekday: 'Mon',
-  startHour: ' 8 AM',
+  startHour: '08 AM',
   startMinute: '00',
-  endHour: ' 9 AM',
+  endHour: '09 AM',
   endMinute: '00',
   tomatoBonus: 10
 }

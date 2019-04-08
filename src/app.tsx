@@ -9,8 +9,10 @@ import 'taro-icons/scss/FontAwesome.scss' // 322KB
 // https://nervjs.github.io/taro-ui-theme-preview/
 // https://taro-ui.aotu.io/#/docs/introduction
 // https://taro-ui.aotu.io/#/docs/customizetheme
+// !!微信开发者工具->调试基础库需要大于2.2.3
 // import 'taro-ui/dist/style/index.scss' // 默认样式
-import './static/styles/custom-theme.scss' // 自定义样式
+// import './static/styles/taro-ui.css' // 自定义样式，单文件版本
+import './static/styles/custom-theme.scss' // 自定义样式，开发版本
 
 import Index from './pages/index'
 import './app.scss'
