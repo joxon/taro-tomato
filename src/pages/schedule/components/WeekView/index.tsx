@@ -3,7 +3,9 @@ import { View } from '@tarojs/components'
 
 import { ITask, IDay, TWeekday, THour } from '../../index.d'
 import WEEKDAYS from '../../constants/WEEKDAYS'
-import TaskCard from '../components/TaskCard'
+import TaskCard from '../TaskCard'
+import parseHour from '../../utils'
+
 import './index.scss'
 
 interface IProps {
@@ -55,24 +57,24 @@ export default class WeekView extends Component<IProps, {}> {
   }
 
   readonly ROWS_HOUR: THour[] = [
-    '06 AM',
-    '07 AM',
-    '08 AM',
-    '09 AM',
-    '10 AM',
-    '11 AM',
-    '12 PM',
-    '01 PM',
-    '02 PM',
-    '03 PM',
-    '04 PM',
-    '05 PM',
-    '06 PM',
-    '07 PM',
-    '08 PM',
-    '09 PM',
-    '10 PM',
-    '11 PM'
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23'
   ]
 
   readonly COLS_WDAY: TWeekday[] = [
@@ -117,7 +119,7 @@ export default class WeekView extends Component<IProps, {}> {
         <View className='content'>
           {this.ROWS_HOUR.map(hour => (
             <View className='content-row' key={hour}>
-              <View className='time-cell'>{hour}</View>
+              <View className='time-cell'>{`${parseHour(hour)} 点`}</View>
 
               <View className='tasks-row'>
                 {this.COLS_WDAY.map(wday => (

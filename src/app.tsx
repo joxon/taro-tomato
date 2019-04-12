@@ -11,8 +11,8 @@ import 'taro-icons/scss/FontAwesome.scss' // 322KB
 // https://taro-ui.aotu.io/#/docs/customizetheme
 // !!微信开发者工具->调试基础库需要大于2.2.3
 // import 'taro-ui/dist/style/index.scss' // 默认样式
-// import './static/styles/taro-ui.css' // 自定义样式，单文件版本
-import './static/styles/custom-theme.scss' // 自定义样式，开发版本
+// import './assets/styles/taro-ui.css' // 自定义样式，单文件版本
+// import './assets/styles/custom-theme.scss' // 自定义样式，开发版本
 
 import Index from './pages/index'
 import './app.scss'
@@ -35,20 +35,20 @@ class App extends Taro.Component {
     tabBar: {
       list: [
         {
-          iconPath: 'static/images/node.png',
-          selectedIconPath: 'static/images/node.png',
+          iconPath: 'assets/images/node.png',
+          selectedIconPath: 'assets/images/node.png',
           pagePath: 'pages/schedule/index',
           text: '日程'
         },
         {
-          iconPath: 'static/images/node.png',
-          selectedIconPath: 'static/images/node.png',
+          iconPath: 'assets/images/node.png',
+          selectedIconPath: 'assets/images/node.png',
           pagePath: 'pages/tomato/index',
           text: '番茄'
         },
         {
-          iconPath: 'static/images/node.png',
-          selectedIconPath: 'static/images/node.png',
+          iconPath: 'assets/images/node.png',
+          selectedIconPath: 'assets/images/node.png',
           pagePath: 'pages/dynamics/index',
           text: '动态'
         }

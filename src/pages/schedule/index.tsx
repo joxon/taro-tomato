@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { AtTabs, AtTabsPane } from 'taro-ui'
+import { AtTabs, AtTabsPane, AtFab } from 'taro-ui'
 import { FontAwesome } from 'taro-icons'
 
 // import {
@@ -35,8 +35,8 @@ const defaultState: IState = {
     {
       name: '写作业',
       weekday: 'Sat',
-      startHour: '08 AM',
-      endHour: '10 AM',
+      startHour: '08',
+      endHour: '10',
       startMinute: '00',
       endMinute: '00',
       tomatoBonus: 10
@@ -44,8 +44,8 @@ const defaultState: IState = {
     {
       name: '读书',
       weekday: 'Sat',
-      startHour: '11 AM',
-      endHour: '11 AM',
+      startHour: '11',
+      endHour: '11',
       startMinute: '00',
       endMinute: '30',
       tomatoBonus: 10
@@ -53,8 +53,8 @@ const defaultState: IState = {
     {
       name: '篮球班',
       weekday: 'Sat',
-      startHour: '03 PM',
-      endHour: '05 PM',
+      startHour: '15',
+      endHour: '17',
       startMinute: '00',
       endMinute: '00',
       tomatoBonus: 10

@@ -12,13 +12,13 @@ type TPageMode = 'add' | 'edit'
 
 interface IOptions extends ComponentOptions {
   mode: TPageMode
-  taskName: string
-  taskWeekday: TWeekday
-  taskStartHour: THour
-  taskStartMinute: TMinute
-  taskEndHour: THour
-  taskEndMinute: TMinute
-  taskTomatoBonus: number
+  name: string
+  weekday: TWeekday
+  startHour: THour
+  startMinute: TMinute
+  endHour: THour
+  endMinute: TMinute
+  tomatoBonus: number
 }
 
 export default class taskDetails extends Component {
@@ -26,21 +26,21 @@ export default class taskDetails extends Component {
     navigationBarTitleText: '任务详情'
   }
 
-  params: IOptions = {
+  options: IOptions = {
     mode: 'add',
-    taskName: DEFAULT_TASK.name,
-    taskWeekday: DEFAULT_TASK.weekday,
-    taskStartHour: DEFAULT_TASK.startHour,
-    taskStartMinute: DEFAULT_TASK.startMinute,
-    taskEndHour: DEFAULT_TASK.endHour,
-    taskEndMinute: DEFAULT_TASK.endMinute,
-    taskTomatoBonus: DEFAULT_TASK.tomatoBonus
+    name: DEFAULT_TASK.name,
+    weekday: DEFAULT_TASK.weekday,
+    startHour: DEFAULT_TASK.startHour,
+    startMinute: DEFAULT_TASK.startMinute,
+    endHour: DEFAULT_TASK.endHour,
+    endMinute: DEFAULT_TASK.endMinute,
+    tomatoBonus: DEFAULT_TASK.tomatoBonus
   }
 
   state = {}
 
   componentWillMount () {
-    this.params = this.$router.params
+    this.options = this.$router.params
   }
 
   onSubmit (event: any) {
@@ -53,7 +53,7 @@ export default class taskDetails extends Component {
   handleInput () {}
 
   render () {
-    const { mode, ...task } = this.params
+    const { mode, ...task } = this.options
 
     type ElementOrNothing = JSX.Element | undefined
 
@@ -87,52 +87,52 @@ export default class taskDetails extends Component {
         title='任务名称'
         type='text'
         placeholder='给任务起个名字吧~'
-        value={mode === 'add' ? undefined : task.taskName}
+        value={mode === 'add' ? undefined : task.name}
         onChange={this.handleInput}
       />
     )
 
     const taskWeekdayPicker = (
       <View className='task-weekday-picker'>
-        <Text>任务周次</Text>
-        <View>
-          <Picker
-            mode='selector'
-            range={WEEKDAYS.map(day => day.weekdayName)}
-            value={
-              mode === 'add'
-                ? 0
-                : WEEKDAYS.map(day => day.weekdayName).indexOf(task.taskWeekday)
-            }
-            onChange={this.handleInput}
-          >
-            <View>{WEEKDAYS.map(day => day.weekdayName)[0]}</View>
-          </Picker>
-        </View>
+        <Picker
+          mode='selector'
+          range={WEEKDAYS.map(day => day.weekdayName)}
+          value={
+            mode === 'add'
+              ? 0
+              : WEEKDAYS.map(day => day.weekdayName).indexOf(task.weekday)
+          }
+          onChange={this.handleInput}
+        >
+          <View className='label'>任务周次</View>
+          <View className='value'>
+            {WEEKDAYS.map(day => day.weekdayName)[0]}
+          </View>
+        </Picker>
       </View>
     )
 
     const taskStartTimePicker = (
-      <View className='task-weekday-picker'>
-        <Text>开始时间</Text>
-        <View>
-          <Picker
-            mode='time'
-            value={
-              mode === 'add'
-                ? '08:00'
-                : `${task.taskStartHour.slice(0, 2)}:${task.taskStartMinute}`
-            }
-            onChange={this.handleInput}
-          >
-            <View>08:00</View>
-          </Picker>
-        </View>
+      <View className='task-start-time-picker'>
+        <Picker
+          mode='time'
+          value={
+            mode === 'add'
+              ? '08:00'
+              : `${task.startHour.slice(0, 2)}:${task.startMinute}`
+          }
+          onChange={this.handleInput}
+        >
+          <View className='label'>开始时间</View>
+          <View className='value'>
+            {WEEKDAYS.map(day => day.weekdayName)[0]}
+          </View>
+        </Picker>
       </View>
     )
 
     const taskEndTimePicker = (
-      <View className='task-weekday-picker'>
+      <View className='task-end-time-picker'>
         <Text>结束时间</Text>
         <View>
           <Picker
@@ -140,7 +140,7 @@ export default class taskDetails extends Component {
             value={
               mode === 'add'
                 ? '09:00'
-                : `${task.taskStartHour.slice(0, 2)}:${task.taskStartMinute}`
+                : `${task.startHour.slice(0, 2)}:${task.startMinute}`
             }
             onChange={this.handleInput}
           >
@@ -156,7 +156,7 @@ export default class taskDetails extends Component {
         min={0}
         max={100}
         step={10}
-        value={mode === 'add' ? 10 : task.taskTomatoBonus}
+        value={mode === 'add' ? 10 : task.tomatoBonus}
         onChange={this.handleInput}
       />
     )
