@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
-import { AtTabs, AtTabsPane, AtFab } from 'taro-ui'
+import { AtTabs, AtTabsPane } from 'taro-ui'
 import { FontAwesome } from 'taro-icons'
 
 // import {

@@ -1,5 +1,5 @@
 import Taro, { Component, Config, ComponentOptions } from '@tarojs/taro'
-import { View, Picker, Text } from '@tarojs/components'
+import { View, Picker } from '@tarojs/components'
 import { AtButton, AtForm, AtInput, AtInputNumber } from 'taro-ui'
 
 import { TWeekday, THour, TMinute } from './index.d'
@@ -117,48 +117,44 @@ export default class taskDetails extends Component {
         <Picker
           mode='time'
           value={
-            mode === 'add'
-              ? '08:00'
-              : `${task.startHour.slice(0, 2)}:${task.startMinute}`
+            mode === 'add' ? '08:00' : `${task.startHour}:${task.startMinute}`
           }
           onChange={this.handleInput}
         >
           <View className='label'>开始时间</View>
-          <View className='value'>
-            {WEEKDAYS.map(day => day.weekdayName)[0]}
-          </View>
+          <View className='value'>08:00</View>
         </Picker>
       </View>
     )
 
     const taskEndTimePicker = (
       <View className='task-end-time-picker'>
-        <Text>结束时间</Text>
-        <View>
-          <Picker
-            mode='time'
-            value={
-              mode === 'add'
-                ? '09:00'
-                : `${task.startHour.slice(0, 2)}:${task.startMinute}`
-            }
-            onChange={this.handleInput}
-          >
-            <View>09:00</View>
-          </Picker>
-        </View>
+        <Picker
+          mode='time'
+          value={
+            mode === 'add' ? '09:00' : `${task.startHour}:${task.startMinute}`
+          }
+          onChange={this.handleInput}
+        >
+          <View className='label'>结束时间</View>
+          <View className='value'>09:00</View>
+        </Picker>
       </View>
     )
 
     const taskTomatoInputNumber = (
-      <AtInputNumber
-        type='digit'
-        min={0}
-        max={100}
-        step={10}
-        value={mode === 'add' ? 10 : task.tomatoBonus}
-        onChange={this.handleInput}
-      />
+      <View className='task-tomato-input-number'>
+        <View className='label'>番茄奖励</View>
+        <AtInputNumber
+          className='value'
+          type='digit'
+          min={0}
+          max={100}
+          step={10}
+          value={mode === 'add' ? 10 : task.tomatoBonus}
+          onChange={this.handleInput}
+        />
+      </View>
     )
 
     return (
