@@ -1,10 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
-import { ITask, IDay, TWeekday, THour } from '../../index.d'
-import WEEKDAYS from '../../constants/WEEKDAYS'
 import TaskCard from '../TaskCard'
-import parseHour from '../../utils'
+import { ITask, IDay, TWeekday, THour } from '../../index.d'
+import { WEEKDAYS, TIME } from '../../constants'
+import { parseHourToString } from '../../utils'
 
 import './index.scss'
 
@@ -17,75 +17,12 @@ export default class WeekView extends Component<IProps, {}> {
   // 此处要加static，否则微信端报错
   static defaultProps: IProps = {
     tasks: [],
-    recentWeekdays: [
-      {
-        weekdayName: '周一',
-        weekday: 'Mon',
-        date: '1-1'
-      },
-      {
-        weekdayName: '周二',
-        weekday: 'Tue',
-        date: '1-2'
-      },
-      {
-        weekdayName: '周三',
-        weekday: 'Wed',
-        date: '1-3'
-      },
-      {
-        weekdayName: '周四',
-        weekday: 'Thu',
-        date: '1-4'
-      },
-      {
-        weekdayName: '周五',
-        weekday: 'Fri',
-        date: '1-5'
-      },
-      {
-        weekdayName: '周六',
-        weekday: 'Sat',
-        date: '1-6'
-      },
-      {
-        weekdayName: '周日',
-        weekday: 'Sun',
-        date: '1-7'
-      }
-    ]
+    recentWeekdays: WEEKDAYS
   }
 
-  readonly ROWS_HOUR: THour[] = [
-    '06',
-    '07',
-    '08',
-    '09',
-    '10',
-    '11',
-    '12',
-    '13',
-    '14',
-    '15',
-    '16',
-    '17',
-    '18',
-    '19',
-    '20',
-    '21',
-    '22',
-    '23'
-  ]
+  readonly ROWS_HOUR: THour[] = TIME[0]
 
-  readonly COLS_WDAY: TWeekday[] = [
-    'Mon',
-    'Tue',
-    'Wed',
-    'Thu',
-    'Fri',
-    'Sat',
-    'Sun'
-  ]
+  readonly COLS_WDAY: TWeekday[] = WEEKDAYS.map(day => day.weekday)
 
   render () {
     const { tasks, recentWeekdays } = this.props
@@ -119,7 +56,9 @@ export default class WeekView extends Component<IProps, {}> {
         <View className='content'>
           {this.ROWS_HOUR.map(hour => (
             <View className='content-row' key={hour}>
-              <View className='time-cell'>{`${parseHour(hour)} 点`}</View>
+              <View className='time-cell'>{`${parseHourToString(
+                hour
+              )} 点`}</View>
 
               <View className='tasks-row'>
                 {this.COLS_WDAY.map(wday => (

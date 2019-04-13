@@ -20,7 +20,8 @@ export default class TaskView extends Component<IProps, {}> {
   }
 
   navigateToTaskAdd () {
-    Taro.navigateTo({ url: './taskDetails?mode=add' })
+    this.$preload('mode', 'add')
+    Taro.navigateTo({ url: 'taskDetails' })
   }
 
   render () {

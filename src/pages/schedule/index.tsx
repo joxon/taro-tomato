@@ -13,7 +13,7 @@ import { FontAwesome } from 'taro-icons'
 import { TWeekday, ITask, IDay, ITab } from './index.d'
 import TaskView from './components/TaskView'
 import WeekView from './components/WeekView'
-import WEEKDAYS from './constants/WEEKDAYS'
+import { WEEKDAYS } from './constants'
 
 import './index.scss'
 
@@ -33,6 +33,7 @@ const defaultState: IState = {
   viewMode: EViewMode.TaskView,
   tasks: [
     {
+      id: '1',
       name: '写作业',
       weekday: 'Sat',
       startHour: '08',
@@ -42,6 +43,7 @@ const defaultState: IState = {
       tomatoBonus: 10
     },
     {
+      id: '2',
       name: '读书',
       weekday: 'Sat',
       startHour: '11',
@@ -51,6 +53,7 @@ const defaultState: IState = {
       tomatoBonus: 10
     },
     {
+      id: '3',
       name: '篮球班',
       weekday: 'Sat',
       startHour: '15',
@@ -73,13 +76,22 @@ export default class Schedule extends Component<{}, IState> {
     const weekdays: IDay[] = []
 
     const d = new Date()
-    const todaysWeekday = d.getDay() - 1 // getDay返回1-7
+
+    // !!getDay返回0-6
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay#Return_value
+    // An integer number, between 0 and 6,
+    // corresponding to the day of the week for the given date,
+    // according to local time:
+    // 0 for Sunday, 1 for Monday, 2 for Tuesday, and so on.
+    const todaysIndexTemp = d.getDay() - 1
+    const todaysIndex = todaysIndexTemp === -1 ? 6 : todaysIndexTemp
 
     for (let i = 0; i < WEEKDAYS.length; ++i) {
-      const day = WEEKDAYS[(i + todaysWeekday) % WEEKDAYS.length]
+      const day = WEEKDAYS[(i + todaysIndex) % WEEKDAYS.length]
 
       const daysMonth = d.getMonth() + 1 // getMonth返回0-11
       const daysDay = d.getDate() // getDate返回1-31
+
       day.date = `${daysMonth}-${daysDay}`
       weekdays.push(day)
 
@@ -89,13 +101,8 @@ export default class Schedule extends Component<{}, IState> {
     return weekdays
   }
 
-  constructor () {
-    super()
-    this.recentWeekdays = this.getRecentWeekdays()
-  }
-
   componentWillMount () {
-    //
+    this.recentWeekdays = this.getRecentWeekdays()
   }
 
   componentDidMount () {
@@ -116,7 +123,10 @@ export default class Schedule extends Component<{}, IState> {
   }
 
   navigateToTaskAdd () {
-    Taro.navigateTo({ url: 'taskDetails?mode=add' })
+    this.$preload({
+      mode: 'add'
+    })
+    Taro.navigateTo({ url: 'taskDetails' })
   }
 
   render () {

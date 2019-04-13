@@ -2,14 +2,15 @@
 
 export type TWeekday = 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat' | 'Sun'
 
-// 考虑到儿童休息，故排除0-5AM
+// 考虑到儿童休息，本应排除0-5AM
+// 但是实现起来会麻烦一些，因为索引不能对应
 export type THour =
-  // | '00'
-  // | '01'
-  // | '02'
-  // | '03'
-  // | '04'
-  // | '05'
+  | '00'
+  | '01'
+  | '02'
+  | '03'
+  | '04'
+  | '05'
   | '06'
   | '07'
   | '08'
@@ -92,6 +93,8 @@ export type TMinute =
   | '59'
 
 export interface ITask {
+  id: string
+
   name: string
 
   weekday: TWeekday
