@@ -156,9 +156,7 @@ export default class taskDetails extends Component<{}, IState> {
   render () {
     const { mode, ...task } = this.state
 
-    type ElementOrNothing = JSX.Element | undefined
-
-    const addButtonGroup: ElementOrNothing =
+    const buttons =
       mode === 'add' ? (
         <View>
           <AtButton type='primary' formType='submit'>
@@ -167,19 +165,12 @@ export default class taskDetails extends Component<{}, IState> {
           <AtButton type='secondary'>重新填写</AtButton>
         </View>
       ) : (
-        undefined
-      )
-
-    const editButtonGroup: ElementOrNothing =
-      mode === 'edit' ? (
         <View>
           <AtButton type='primary' formType='submit'>
             保存任务
           </AtButton>
           <AtButton type='secondary'>删除任务</AtButton>
         </View>
-      ) : (
-        undefined
       )
 
     const taskNameInput = (
@@ -188,7 +179,7 @@ export default class taskDetails extends Component<{}, IState> {
         title='任务名称'
         type='text'
         placeholder='给任务起个名字吧~'
-        value={this.state.name}
+        value={task.name}
         onChange={this.handleNameInput}
       />
     )
@@ -198,11 +189,11 @@ export default class taskDetails extends Component<{}, IState> {
         <Picker
           mode='selector'
           range={WEEKDAYS.map(day => day.weekdayName)}
-          value={this.state.weekdayIndex as number}
+          value={task.weekdayIndex}
           onChange={this.handleWeekdayPicker}
         >
           <View className='label'>任务周次</View>
-          <View className='value'>{this.state.weekdayName}</View>
+          <View className='value'>{task.weekdayName}</View>
         </Picker>
       </View>
     )
@@ -211,11 +202,11 @@ export default class taskDetails extends Component<{}, IState> {
       <View className='task-start-time-picker'>
         <Picker
           mode='time'
-          value={this.state.startTime}
+          value={task.startTime}
           onChange={this.handleStartTimePicker}
         >
           <View className='label'>开始时间</View>
-          <View className='value'>{this.state.startTime}</View>
+          <View className='value'>{task.startTime}</View>
         </Picker>
       </View>
     )
@@ -224,11 +215,11 @@ export default class taskDetails extends Component<{}, IState> {
       <View className='task-end-time-picker'>
         <Picker
           mode='time'
-          value={this.state.endTime}
+          value={task.endTime}
           onChange={this.handleEndTimePicker}
         >
           <View className='label'>结束时间</View>
-          <View className='value'>{this.state.endTime}</View>
+          <View className='value'>{task.endTime}</View>
         </Picker>
       </View>
     )
@@ -242,7 +233,7 @@ export default class taskDetails extends Component<{}, IState> {
           min={10}
           max={100}
           step={10}
-          value={this.state.tomatoBonus}
+          value={task.tomatoBonus}
           onChange={this.handleTomatoInputNumber}
         />
       </View>
@@ -258,8 +249,7 @@ export default class taskDetails extends Component<{}, IState> {
         {taskStartTimePicker}
         {taskEndTimePicker}
         {taskTomatoInputNumber}
-        {addButtonGroup}
-        {editButtonGroup}
+        {buttons}
       </AtForm>
     )
   }
