@@ -1,5 +1,38 @@
 import { ITask, IDay, THour, TMinute } from '../index.d'
 
+export const DEFAULT_TASK_LIST: ITask[] = [
+  {
+    id: '1',
+    name: '写作业',
+    weekday: 'Sat',
+    startHour: '08',
+    endHour: '10',
+    startMinute: '00',
+    endMinute: '00',
+    tomatoBonus: 10
+  },
+  {
+    id: '2',
+    name: '读书',
+    weekday: 'Sat',
+    startHour: '11',
+    endHour: '11',
+    startMinute: '00',
+    endMinute: '30',
+    tomatoBonus: 10
+  },
+  {
+    id: '3',
+    name: '篮球班',
+    weekday: 'Sat',
+    startHour: '15',
+    endHour: '17',
+    startMinute: '00',
+    endMinute: '00',
+    tomatoBonus: 10
+  }
+]
+
 export const DEFAULT_TASK: ITask = {
   id: '',
   name: '',

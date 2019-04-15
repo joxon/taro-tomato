@@ -1,30 +1,34 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Picker } from '@tarojs/components'
-import { BaseEventOrig } from '@tarojs/components/types/common'
+import { View, Picker, Label, Input } from '@tarojs/components'
+import {
+  PickerTimeProps,
+  PickerSelectorProps
+} from '@tarojs/components/types/Picker'
+import { BaseEventOrig, CommonEvent } from '@tarojs/components/types/common'
 import { AtButton, AtForm, AtInput, AtInputNumber } from 'taro-ui'
 
 import { TWeekday, THour, TMinute } from './index.d'
 import { DEFAULT_TASK, WEEKDAYS } from './constants'
+import { parseTimeToNumber } from './utils'
 
 import './taskDetails.scss'
-import { parseTimeToNumber } from './utils'
 
 type TPageMode = 'add' | 'edit'
 
 interface IState {
-  mode: TPageMode
-  id?: string
-  name: string
-  weekday: TWeekday
-  weekdayName: string
-  weekdayIndex: number
-  startHour: THour
-  startMinute: TMinute
-  startTime: string // hh:mm
-  endHour: THour
-  endMinute: TMinute
-  endTime: string // hh:mm
-  tomatoBonus: number
+  mode: TPageMode // taskDetails
+  id?: string // ITask
+  name: string // ITask
+  weekday: TWeekday // ITask
+  weekdayName: string // taskDetails
+  weekdayIndex: number // taskDetails
+  startHour: THour // ITask
+  startMinute: TMinute // ITask
+  startTime: string // hh:mm, taskDetails
+  endHour: THour // ITask
+  endMinute: TMinute // ITask
+  endTime: string // hh:mm, taskDetails
+  tomatoBonus: number // ITask
 }
 
 export default class taskDetails extends Component<{}, IState> {
@@ -59,16 +63,20 @@ export default class taskDetails extends Component<{}, IState> {
         preload.weekday
       )
       const weekdayName = WEEKDAYS[weekdayIndex].weekdayName
+      const startTime = `${preload.startHour}:${preload.startMinute}`
+      const endTime = `${preload.endHour}:${preload.endMinute}`
 
       this.setState({
         ...preload,
         weekdayIndex,
-        weekdayName
+        weekdayName,
+        startTime,
+        endTime
       })
     }
   }
 
-  onSubmit (event: any) {
+  onSubmit (event: CommonEvent) {
     console.log(event)
     console.log(this.state)
   }
@@ -81,8 +89,9 @@ export default class taskDetails extends Component<{}, IState> {
     this.setState({ name })
   }
 
-  handleWeekdayPicker (event: BaseEventOrig<any>) {
+  handleWeekdayPicker (event: BaseEventOrig<PickerSelectorProps>) {
     const val: number = event.detail.value
+
     this.setState({
       weekdayIndex: val,
       weekday: WEEKDAYS[val].weekday,
@@ -90,7 +99,7 @@ export default class taskDetails extends Component<{}, IState> {
     })
   }
 
-  handleStartTimePicker (event: BaseEventOrig<any>) {
+  handleStartTimePicker (event: BaseEventOrig<PickerTimeProps>) {
     const startTime: string = event.detail.value
     const startTimeNum = parseTimeToNumber(startTime)
 
@@ -125,7 +134,7 @@ export default class taskDetails extends Component<{}, IState> {
     })
   }
 
-  handleEndTimePicker (event: BaseEventOrig<any>) {
+  handleEndTimePicker (event: BaseEventOrig<PickerTimeProps>) {
     const endTime = event.detail.value
     const startTimeNum = parseTimeToNumber(this.state.startTime)
     const endTimeNum = parseTimeToNumber(endTime)
@@ -143,7 +152,10 @@ export default class taskDetails extends Component<{}, IState> {
         duration: 2000
       })
     } else {
-      this.setState({ endTime })
+      const endTimeParts = endTime.split(':')
+      const endHour = endTimeParts[0] as THour
+      const endMinute = endTimeParts[1] as TMinute
+      this.setState({ endTime, endHour, endMinute })
     }
   }
 
@@ -154,7 +166,84 @@ export default class taskDetails extends Component<{}, IState> {
   }
 
   render () {
-    const { mode, ...task } = this.state
+    const { mode, ...taskState } = this.state
+
+    const taskNameInput = (
+      <AtInput
+        name='taskName'
+        title='任务名称'
+        type='text'
+        placeholder='给任务起个名字吧~'
+        value={taskState.name}
+        onChange={this.handleNameInput}
+      />
+    )
+
+    const taskWeekdayPicker = (
+      <View className='at-input'>
+        <View className='at-input__container'>
+          <Label className='at-input__title'>任务周次</Label>
+          <Picker
+            className='at-input__input'
+            mode='selector'
+            range={WEEKDAYS.map(day => day.weekdayName)}
+            value={taskState.weekdayIndex}
+            onChange={this.handleWeekdayPicker}
+          >
+            {taskState.weekdayName}
+          </Picker>
+        </View>
+      </View>
+    )
+
+    const taskStartTimePicker = (
+      <View className='at-input'>
+        <View className='at-input__container'>
+          <Label className='at-input__title'>开始时间</Label>
+          <Picker
+            className='at-input__input'
+            mode='time'
+            value={taskState.startTime}
+            onChange={this.handleStartTimePicker}
+          >
+            {taskState.startTime}
+          </Picker>
+        </View>
+      </View>
+    )
+
+    const taskEndTimePicker = (
+      <View className='at-input'>
+        <View className='at-input__container'>
+          <Label className='at-input__title'>结束时间</Label>
+          <Picker
+            className='at-input__input'
+            mode='time'
+            value={taskState.endTime}
+            onChange={this.handleEndTimePicker}
+          >
+            {taskState.endTime}
+          </Picker>
+        </View>
+      </View>
+    )
+
+    const taskTomatoInputNumber = (
+      <View className='at-input'>
+        <View className='at-input__container'>
+          <Label className='at-input__title'>番茄奖励</Label>
+          <AtInputNumber
+            className='at-input__input'
+            type='digit'
+            min={10}
+            max={100}
+            step={10}
+            value={taskState.tomatoBonus}
+            onChange={this.handleTomatoInputNumber}
+          />
+        </View>
+      </View>
+    )
 
     const buttons =
       mode === 'add' ? (
@@ -162,7 +251,9 @@ export default class taskDetails extends Component<{}, IState> {
           <AtButton type='primary' formType='submit'>
             添加任务
           </AtButton>
-          <AtButton type='secondary'>重新填写</AtButton>
+          <AtButton type='secondary' formType='reset'>
+            重新填写
+          </AtButton>
         </View>
       ) : (
         <View>
@@ -173,74 +264,9 @@ export default class taskDetails extends Component<{}, IState> {
         </View>
       )
 
-    const taskNameInput = (
-      <AtInput
-        name='taskName'
-        title='任务名称'
-        type='text'
-        placeholder='给任务起个名字吧~'
-        value={task.name}
-        onChange={this.handleNameInput}
-      />
-    )
-
-    const taskWeekdayPicker = (
-      <View className='task-weekday-picker'>
-        <Picker
-          mode='selector'
-          range={WEEKDAYS.map(day => day.weekdayName)}
-          value={task.weekdayIndex}
-          onChange={this.handleWeekdayPicker}
-        >
-          <View className='label'>任务周次</View>
-          <View className='value'>{task.weekdayName}</View>
-        </Picker>
-      </View>
-    )
-
-    const taskStartTimePicker = (
-      <View className='task-start-time-picker'>
-        <Picker
-          mode='time'
-          value={task.startTime}
-          onChange={this.handleStartTimePicker}
-        >
-          <View className='label'>开始时间</View>
-          <View className='value'>{task.startTime}</View>
-        </Picker>
-      </View>
-    )
-
-    const taskEndTimePicker = (
-      <View className='task-end-time-picker'>
-        <Picker
-          mode='time'
-          value={task.endTime}
-          onChange={this.handleEndTimePicker}
-        >
-          <View className='label'>结束时间</View>
-          <View className='value'>{task.endTime}</View>
-        </Picker>
-      </View>
-    )
-
-    const taskTomatoInputNumber = (
-      <View className='task-tomato-input-number'>
-        <View className='label'>番茄奖励</View>
-        <AtInputNumber
-          className='value'
-          type='digit'
-          min={10}
-          max={100}
-          step={10}
-          value={task.tomatoBonus}
-          onChange={this.handleTomatoInputNumber}
-        />
-      </View>
-    )
-
     return (
       <AtForm
+        className='form'
         onSubmit={this.onSubmit.bind(this)}
         onReset={this.onReset.bind(this)}
       >

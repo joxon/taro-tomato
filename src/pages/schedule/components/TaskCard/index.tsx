@@ -22,7 +22,9 @@ export default class TaskCard extends Component<IProps, {}> {
       mode: 'edit',
       ...task
     })
-    Taro.navigateTo({ url: `taskDetails` })
+    Taro.navigateTo({
+      url: `taskDetails`
+    })
   }
 
   render () {
