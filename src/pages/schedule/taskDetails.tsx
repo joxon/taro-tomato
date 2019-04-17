@@ -1,5 +1,5 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Picker, Label, Input } from '@tarojs/components'
+import { View, Picker, Label } from '@tarojs/components'
 import {
   PickerTimeProps,
   PickerSelectorProps
@@ -31,12 +31,12 @@ interface IState {
   tomatoBonus: number // ITask
 }
 
-export default class taskDetails extends Component<{}, IState> {
+export default class TaskDetails extends Component<{}, IState> {
   config: Config = {
     navigationBarTitleText: '任务详情'
   }
 
-  state: IState = {
+  static defaultState: IState = {
     mode: 'add',
     name: DEFAULT_TASK.name,
     weekday: DEFAULT_TASK.weekday,
@@ -50,6 +50,8 @@ export default class taskDetails extends Component<{}, IState> {
     endTime: `${DEFAULT_TASK.endHour}:${DEFAULT_TASK.endMinute}`,
     tomatoBonus: DEFAULT_TASK.tomatoBonus
   }
+
+  state: IState = TaskDetails.defaultState
 
   componentWillMount () {
     // console.log('params: ')
@@ -83,6 +85,7 @@ export default class taskDetails extends Component<{}, IState> {
 
   onReset (event: any) {
     console.log(event)
+    this.setState(TaskDetails.defaultState)
   }
 
   handleNameInput (name: string) {
@@ -162,6 +165,12 @@ export default class taskDetails extends Component<{}, IState> {
   handleTomatoInputNumber (tomatoBonus: number) {
     this.setState({
       tomatoBonus
+    })
+  }
+
+  redirectToTomatoClock () {
+    Taro.redirectTo({
+      url: 'tomatoClock'
     })
   }
 
@@ -259,6 +268,9 @@ export default class taskDetails extends Component<{}, IState> {
         <View>
           <AtButton type='primary' formType='submit'>
             保存任务
+          </AtButton>
+          <AtButton type='secondary' onClick={this.redirectToTomatoClock}>
+            启动番茄钟
           </AtButton>
           <AtButton type='secondary'>删除任务</AtButton>
         </View>

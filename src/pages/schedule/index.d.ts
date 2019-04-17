@@ -92,6 +92,8 @@ export type TMinute =
   | '58'
   | '59'
 
+export type TSecond = TMinute
+
 export interface ITask {
   id: string
 

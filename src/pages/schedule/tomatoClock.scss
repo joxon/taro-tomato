@@ -1,0 +1,45 @@
+.clock {
+  padding-top: 50rpx;
+
+  &-digital {
+    text-align: center;
+
+    .min {
+      font-size: 150rpx;
+    }
+    .sec {
+      font-size: 100rpx;
+    }
+  }
+
+  &-analog {
+    width: 100%;
+    text-align: center;
+
+    image {
+      height: 200rpx;
+      width: 200rpx;
+    }
+  }
+
+  &-buttons {
+    position: absolute;
+    bottom: 50rpx;
+    width: 100%;
+
+    flex: 1;
+    display: flex;
+
+    .button {
+      flex: 1;
+      text-align: center;
+
+      padding: 20rpx;
+      margin: 20rpx;
+
+      background-color: #ffffff;
+      border: 1px solid salmon;
+      border-radius: 50px;
+    }
+  }
+}

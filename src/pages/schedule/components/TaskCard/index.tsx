@@ -1,10 +1,13 @@
 import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import { AtCard } from 'taro-ui'
+import { CommonEvent } from '@tarojs/components/types/common'
 
 import { ITask } from '../../index.d'
 import { DEFAULT_TASK } from '../../constants'
 import { parseHourToString } from '../../utils'
+
+import './index.scss'
 
 interface IProps {
   task: ITask
@@ -27,6 +30,13 @@ export default class TaskCard extends Component<IProps, {}> {
     })
   }
 
+  navigateToTomatoClock (event: CommonEvent) {
+    event.stopPropagation()
+    Taro.navigateTo({
+      url: `tomatoClock`
+    })
+  }
+
   render () {
     const { task, showStartTime } = this.props
 
@@ -38,13 +48,19 @@ export default class TaskCard extends Component<IProps, {}> {
 
     return showStartTime ? (
       <AtCard
+        className='card'
         title={task.name}
         extra={`+ ${task.tomatoBonus} 番茄`}
         onClick={this.navigateToTaskEdit.bind(this, task)}
       >
-        <View>{`${parseHourToString(task.startHour)}:${
-          task.startMinute
-        }`}</View>
+        <View className='card-content'>
+          <Text className='time'>
+            {`${parseHourToString(task.startHour)}:${task.startMinute}`}
+          </Text>
+          <Text className='button' onClick={this.navigateToTomatoClock}>
+            {'番茄钟 >'}
+          </Text>
+        </View>
       </AtCard>
     ) : (
       <View onClick={this.navigateToTaskEdit.bind(this, task)}>

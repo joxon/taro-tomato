@@ -7,6 +7,8 @@ import TaskCard from '../TaskCard'
 
 import './index.scss'
 
+// Prop Types
+// https://reactjs.org/docs/typechecking-with-proptypes.html
 interface IProps {
   tasks: ITask[]
   recentWeekdays: IDay[]
@@ -64,7 +66,7 @@ export default class TaskView extends Component<IProps, {}> {
                     className='task-card task-none'
                     onClick={this.navigateToTaskAdd}
                   >
-                    <AtCard>{'<空>'}</AtCard>
+                    <AtCard>{'<点击添加>'}</AtCard>
                   </View>
                 ) : (
                   tasks.map(task =>

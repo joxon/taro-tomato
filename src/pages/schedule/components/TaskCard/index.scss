@@ -1,0 +1,15 @@
+.card-content {
+  display: flex;
+  align-items: center;
+
+  .time {
+    flex-grow: 1;
+  }
+
+  .button {
+    color: salmon;
+    padding: 10rpx;
+    border: 1rpx solid salmon;
+    border-radius: 10rpx;
+  }
+}

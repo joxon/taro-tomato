@@ -26,8 +26,12 @@ class App extends Taro.Component {
       navigationBarTextStyle: 'white'
       // navigationStyle: 'custom'
     },
+    // app.json pages中的route，会依照设置的顺序进行编译检查，
+    // 只要有错误的page，访问下面的page就会报楼主说的错误，
+    // 所以 @Sincere Xie说的位置往前移动，是可以解决的，只要移动到没有错误的page页面。
     pages: [
       'pages/schedule/index',
+      'pages/schedule/tomatoClock',
       'pages/schedule/taskDetails',
       'pages/tomato/index',
       'pages/dynamics/index'
@@ -35,20 +39,20 @@ class App extends Taro.Component {
     tabBar: {
       list: [
         {
-          iconPath: 'assets/images/node.png',
-          selectedIconPath: 'assets/images/node.png',
+          iconPath: 'assets/images/tasks-off.png',
+          selectedIconPath: 'assets/images/tasks-on.png',
           pagePath: 'pages/schedule/index',
           text: '日程'
         },
         {
-          iconPath: 'assets/images/node.png',
-          selectedIconPath: 'assets/images/node.png',
+          iconPath: 'assets/images/seedling-off.png',
+          selectedIconPath: 'assets/images/seedling-on.png',
           pagePath: 'pages/tomato/index',
           text: '番茄'
         },
         {
-          iconPath: 'assets/images/node.png',
-          selectedIconPath: 'assets/images/node.png',
+          iconPath: 'assets/images/user-friends-off.png',
+          selectedIconPath: 'assets/images/user-friends-on.png',
           pagePath: 'pages/dynamics/index',
           text: '动态'
         }
