@@ -1,0 +1,3 @@
+@startuml demo
+Bob -> Alice : hello
+@enduml
