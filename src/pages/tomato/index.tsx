@@ -1,25 +1,28 @@
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
+import Taro, { Component } from '@tarojs/taro'
+import { View } from '@tarojs/components'
+// import TaroUI from 'taro-ui'
 
-export default class Schedule extends Component {
-  config: Config = {
-    // navigationBarTitleText: '小番茄积分'
+import { IRecord } from './index.d'
+import { DEFAULT_RECORD_LIST } from './constants'
+import ListView from './components/ListView'
+
+import './index.scss'
+
+interface IState {
+  records: IRecord[]
+}
+
+export default class Tomato extends Component<{}, IState> {
+  static defaultState: IState = {
+    records: DEFAULT_RECORD_LIST
   }
 
-  componentWillMount () {}
-
-  componentDidMount () {}
-
-  componentWillUnmount () {}
-
-  componentDidShow () {}
-
-  componentDidHide () {}
+  state: IState = Tomato.defaultState
 
   render () {
     return (
-      <View>
-        <Text>番茄</Text>
+      <View className='tomato-wrapper'>
+        <ListView records={this.state.records} />
       </View>
     )
   }

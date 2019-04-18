@@ -1,6 +1,7 @@
 {
   "extends": ["taro", "standard"],
   "rules": {
+    "import/prefer-default-export": "off",
     "no-unused-vars": ["off", { "varsIgnorePattern": "Taro" }],
     "react/jsx-filename-extension": [
       "warn",
