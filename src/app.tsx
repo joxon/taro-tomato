@@ -57,8 +57,8 @@ class App extends Taro.Component {
           text: '动态'
         }
       ],
-      color: 'black',
-      selectedColor: 'red',
+      color: '#333333',
+      selectedColor: '#fa8072',
       backgroundColor: '#eeeeee',
       borderStyle: 'white'
     }

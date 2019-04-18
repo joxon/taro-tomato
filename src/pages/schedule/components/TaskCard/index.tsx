@@ -30,8 +30,12 @@ export default class TaskCard extends Component<IProps, {}> {
     })
   }
 
-  navigateToTomatoClock (event: CommonEvent) {
+  navigateToTomatoClock (task: ITask, event: CommonEvent) {
     event.stopPropagation()
+    this.$preload({
+      name: task.name,
+      tomatoBonus: task.tomatoBonus
+    })
     Taro.navigateTo({
       url: `tomatoClock`
     })
@@ -57,7 +61,10 @@ export default class TaskCard extends Component<IProps, {}> {
           <Text className='time'>
             {`${parseHourToString(task.startHour)}:${task.startMinute}`}
           </Text>
-          <Text className='button' onClick={this.navigateToTomatoClock}>
+          <Text
+            className='button'
+            onClick={this.navigateToTomatoClock.bind(this, task)}
+          >
             {'番茄钟 >'}
           </Text>
         </View>

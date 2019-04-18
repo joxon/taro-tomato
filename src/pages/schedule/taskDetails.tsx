@@ -7,7 +7,7 @@ import {
 import { BaseEventOrig, CommonEvent } from '@tarojs/components/types/common'
 import { AtButton, AtForm, AtInput, AtInputNumber } from 'taro-ui'
 
-import { TWeekday, THour, TMinute } from './index.d'
+import { TWeekday, THour, TMinute, ITask } from './index.d'
 import { DEFAULT_TASK, WEEKDAYS } from './constants'
 import { parseTimeToNumber } from './utils'
 
@@ -168,14 +168,18 @@ export default class TaskDetails extends Component<{}, IState> {
     })
   }
 
-  redirectToTomatoClock () {
-    Taro.redirectTo({
-      url: 'tomatoClock'
+  redirectToTomatoClock (task: ITask) {
+    this.$preload({
+      name: task.name,
+      tomatoBonus: task.tomatoBonus
+    })
+    Taro.navigateTo({
+      url: `tomatoClock`
     })
   }
 
   render () {
-    const { mode, ...taskState } = this.state
+    const { mode, ...task } = this.state
 
     const taskNameInput = (
       <AtInput
@@ -183,7 +187,7 @@ export default class TaskDetails extends Component<{}, IState> {
         title='任务名称'
         type='text'
         placeholder='给任务起个名字吧~'
-        value={taskState.name}
+        value={task.name}
         onChange={this.handleNameInput}
       />
     )
@@ -196,10 +200,10 @@ export default class TaskDetails extends Component<{}, IState> {
             className='at-input__input'
             mode='selector'
             range={WEEKDAYS.map(day => day.weekdayName)}
-            value={taskState.weekdayIndex}
+            value={task.weekdayIndex}
             onChange={this.handleWeekdayPicker}
           >
-            {taskState.weekdayName}
+            {task.weekdayName}
           </Picker>
         </View>
       </View>
@@ -212,10 +216,10 @@ export default class TaskDetails extends Component<{}, IState> {
           <Picker
             className='at-input__input'
             mode='time'
-            value={taskState.startTime}
+            value={task.startTime}
             onChange={this.handleStartTimePicker}
           >
-            {taskState.startTime}
+            {task.startTime}
           </Picker>
         </View>
       </View>
@@ -228,10 +232,10 @@ export default class TaskDetails extends Component<{}, IState> {
           <Picker
             className='at-input__input'
             mode='time'
-            value={taskState.endTime}
+            value={task.endTime}
             onChange={this.handleEndTimePicker}
           >
-            {taskState.endTime}
+            {task.endTime}
           </Picker>
         </View>
       </View>
@@ -247,7 +251,7 @@ export default class TaskDetails extends Component<{}, IState> {
             min={10}
             max={100}
             step={10}
-            value={taskState.tomatoBonus}
+            value={task.tomatoBonus}
             onChange={this.handleTomatoInputNumber}
           />
         </View>
@@ -269,7 +273,10 @@ export default class TaskDetails extends Component<{}, IState> {
           <AtButton type='primary' formType='submit'>
             保存任务
           </AtButton>
-          <AtButton type='secondary' onClick={this.redirectToTomatoClock}>
+          <AtButton
+            type='secondary'
+            onClick={this.redirectToTomatoClock.bind(this, task)}
+          >
             启动番茄钟
           </AtButton>
           <AtButton type='secondary'>删除任务</AtButton>

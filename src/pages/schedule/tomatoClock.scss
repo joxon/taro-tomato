@@ -1,7 +1,11 @@
 .clock {
   padding-top: 50rpx;
 
-  &-digital {
+  .info {
+    text-align: center;
+  }
+
+  .digital {
     text-align: center;
 
     .min {
@@ -12,7 +16,7 @@
     }
   }
 
-  &-analog {
+  .analog {
     width: 100%;
     text-align: center;
 
@@ -22,7 +26,7 @@
     }
   }
 
-  &-buttons {
+  .buttons {
     position: absolute;
     bottom: 50rpx;
     width: 100%;
@@ -40,6 +44,9 @@
       background-color: #ffffff;
       border: 1px solid salmon;
       border-radius: 50px;
+
+      color: salmon;
+      font-weight: bold;
     }
   }
 }
