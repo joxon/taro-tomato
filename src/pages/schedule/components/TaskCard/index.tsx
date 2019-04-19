@@ -12,12 +12,14 @@ import './index.scss'
 interface IProps {
   task: ITask
   showStartTime: boolean
+  showTomatoClockButton: boolean
 }
 
 export default class TaskCard extends Component<IProps, {}> {
   static defaultProps: IProps = {
     task: DEFAULT_TASK,
-    showStartTime: true
+    showStartTime: true,
+    showTomatoClockButton: false
   }
 
   navigateToTaskEdit (task: ITask) {
@@ -32,9 +34,10 @@ export default class TaskCard extends Component<IProps, {}> {
 
   navigateToTomatoClock (task: ITask, event: CommonEvent) {
     event.stopPropagation()
+    const { name, tomatoBonus } = task
     this.$preload({
-      name: task.name,
-      tomatoBonus: task.tomatoBonus
+      name,
+      tomatoBonus
     })
     Taro.navigateTo({
       url: `tomatoClock`
@@ -42,7 +45,7 @@ export default class TaskCard extends Component<IProps, {}> {
   }
 
   render () {
-    const { task, showStartTime } = this.props
+    const { task, showStartTime, showTomatoClockButton } = this.props
 
     // Error: 不必要的 else 分支，请遵从 ESLint consistent-return: https://eslint.org/docs/rules/consistent-return
     /* eslint consistent-return: "off" */
@@ -50,7 +53,24 @@ export default class TaskCard extends Component<IProps, {}> {
     // onClick传参
     // https://nervjs.github.io/taro/docs/event.html#%E5%90%91%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0
 
-    return showStartTime ? (
+    const timeText = (
+      <Text className='time'>
+        {`${parseHourToString(task.startHour)}:${task.startMinute}`}
+      </Text>
+    )
+
+    const tomatoClockButton = showTomatoClockButton ? (
+      <Text
+        className='button'
+        onClick={this.navigateToTomatoClock.bind(this, task)}
+      >
+        {'番茄钟 >'}
+      </Text>
+    ) : (
+      undefined
+    )
+
+    const card = showStartTime ? (
       <AtCard
         className='card'
         title={task.name}
@@ -58,15 +78,8 @@ export default class TaskCard extends Component<IProps, {}> {
         onClick={this.navigateToTaskEdit.bind(this, task)}
       >
         <View className='card-content'>
-          <Text className='time'>
-            {`${parseHourToString(task.startHour)}:${task.startMinute}`}
-          </Text>
-          <Text
-            className='button'
-            onClick={this.navigateToTomatoClock.bind(this, task)}
-          >
-            {'番茄钟 >'}
-          </Text>
+          {timeText}
+          {tomatoClockButton}
         </View>
       </AtCard>
     ) : (
@@ -74,5 +87,7 @@ export default class TaskCard extends Component<IProps, {}> {
         <View>{task.name}</View>
       </View>
     )
+
+    return card
   }
 }

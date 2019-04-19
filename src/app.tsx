@@ -14,8 +14,15 @@ import 'taro-icons/scss/FontAwesome.scss' // 322KB
 // import './assets/styles/taro-ui.css' // 自定义样式，单文件版本
 // import './assets/styles/custom-theme.scss' // 自定义样式，开发版本
 
+import { Provider } from '@tarojs/mobx'
+
 import Index from './pages/index'
+import store from './store'
 import './app.scss'
+
+const storeProp = {
+  store
+}
 
 class App extends Taro.Component {
   config: Taro.Config = {
@@ -72,10 +79,14 @@ class App extends Taro.Component {
 
   componentDidCatchError () {}
 
-  // 在 App 类中的 render() 函数没有实际作用
-  // 请勿修改此函数
   render () {
-    return <Index />
+    return (
+      // 注意传参是可能包括多个store的object
+      // 如<Provider store={{ store1, store2, ... }}>
+      <Provider store={storeProp}>
+        <Index />
+      </Provider>
+    )
   }
 }
 

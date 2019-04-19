@@ -1,10 +1,15 @@
 import Taro, { Component, Config } from '@tarojs/taro'
 import { View, Text, Image } from '@tarojs/components'
+import { observer, inject } from '@tarojs/mobx'
 import { FontAwesome } from 'taro-icons'
 
 import TOMATO_PNG from './images/tomato.png'
 
 import './tomatoClock.scss'
+
+interface IProps {
+  store: any
+}
 
 interface IState {
   seconds: number
@@ -17,7 +22,8 @@ interface IPreload {
   tomatoBonus: number
 }
 
-export default class TomatoClock extends Component<{}, IState> {
+@inject('store')
+@observer class TomatoClock extends Component<IProps, IState> {
   config: Config = {
     navigationBarTitleText: '番茄钟'
   }
@@ -37,8 +43,13 @@ export default class TomatoClock extends Component<{}, IState> {
   componentWillMount () {
     this.preload = this.$router.preload
     const preload: IPreload = this.$router.preload
+
+    const {
+      store: { secondsToWork }
+    } = this.props
+
     this.setState({
-      seconds: this.defaultSecondsToWork,
+      seconds: secondsToWork,
       name: preload.name,
       tomatoBonus: preload.tomatoBonus
     })
@@ -62,12 +73,16 @@ export default class TomatoClock extends Component<{}, IState> {
     clearInterval(this.clockHandle)
   }
 
-  clockHandle: number
+  clockHandle: NodeJS.Timeout
   isWorking: boolean = true
 
   stopTicking () {
     clearInterval(this.clockHandle)
     // TODO 提交积分事务
+
+    const {
+      store: { secondsToWork, secondsToRest }
+    } = this.props
 
     if (this.isWorking) {
       this.isWorking = false
@@ -79,7 +94,7 @@ export default class TomatoClock extends Component<{}, IState> {
           if (res.confirm) {
             this.setState(
               {
-                seconds: this.defaultSecondsToRest
+                seconds: secondsToRest
               },
               () => {
                 Taro.showToast({
@@ -104,7 +119,7 @@ export default class TomatoClock extends Component<{}, IState> {
           if (res.confirm) {
             this.setState(
               {
-                seconds: this.defaultSecondsToWork
+                seconds: secondsToWork
               },
               () => {
                 this.startTicking()
@@ -223,3 +238,5 @@ export default class TomatoClock extends Component<{}, IState> {
     )
   }
 }
+
+export default TomatoClock

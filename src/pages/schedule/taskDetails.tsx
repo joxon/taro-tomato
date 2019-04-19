@@ -7,7 +7,7 @@ import {
 import { BaseEventOrig, CommonEvent } from '@tarojs/components/types/common'
 import { AtButton, AtForm, AtInput, AtInputNumber } from 'taro-ui'
 
-import { TWeekday, THour, TMinute, ITask } from './index.d'
+import { TWeekday, THour, TMinute } from './index.d'
 import { DEFAULT_TASK, WEEKDAYS } from './constants'
 import { parseTimeToNumber } from './utils'
 
@@ -168,15 +168,15 @@ export default class TaskDetails extends Component<{}, IState> {
     })
   }
 
-  redirectToTomatoClock (task: ITask) {
-    this.$preload({
-      name: task.name,
-      tomatoBonus: task.tomatoBonus
-    })
-    Taro.navigateTo({
-      url: `tomatoClock`
-    })
-  }
+  // redirectToTomatoClock (task: ITask) {
+  //   this.$preload({
+  //     name: task.name,
+  //     tomatoBonus: task.tomatoBonus
+  //   })
+  //   Taro.navigateTo({
+  //     url: `tomatoClock`
+  //   })
+  // }
 
   render () {
     const { mode, ...task } = this.state
@@ -273,12 +273,12 @@ export default class TaskDetails extends Component<{}, IState> {
           <AtButton type='primary' formType='submit'>
             保存任务
           </AtButton>
-          <AtButton
+          {/* <AtButton
             type='secondary'
             onClick={this.redirectToTomatoClock.bind(this, task)}
           >
             启动番茄钟
-          </AtButton>
+          </AtButton> */}
           <AtButton type='secondary'>删除任务</AtButton>
         </View>
       )

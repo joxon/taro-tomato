@@ -4,6 +4,7 @@ import { AtCard } from 'taro-ui'
 
 import { ITask, IDay } from '../../index.d'
 import TaskCard from '../TaskCard'
+import { parseTimeToNumber } from '../../utils'
 
 import './index.scss'
 
@@ -42,6 +43,11 @@ export default class TaskView extends Component<IProps, {}> {
 
     const { tasks, recentWeekdays } = this.props
 
+    const d = new Date()
+    const h = d.getHours()
+    const m = d.getMinutes()
+    const now = h * 100 + m
+
     return (
       <View className='task-view'>
         {tasks.length === 0
@@ -75,7 +81,23 @@ export default class TaskView extends Component<IProps, {}> {
                         className='task-card'
                         key={task.weekday + task.startHour + task.name}
                       >
-                        <TaskCard task={task} showStartTime />
+                        <TaskCard
+                          task={task}
+                          showStartTime
+                          // 任务属于今天，而且当前时间在任务规定时间内
+                          showTomatoClockButton={
+                            day.weekday === recentWeekdays[0].weekday &&
+                            parseTimeToNumber({
+                              hour: task.startHour,
+                              minute: task.startMinute
+                            }) <= now &&
+                            now <=
+                              parseTimeToNumber({
+                                hour: task.endHour,
+                                minute: task.endMinute
+                              })
+                          }
+                        />
                       </View>
                     ) : (
                       ''
