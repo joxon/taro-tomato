@@ -93,7 +93,7 @@ export default class Schedule extends Component<{}, IState> {
 
   navigateToTaskAdd () {
     this.$preload({ mode: 'add' })
-    Taro.navigateTo({ url: 'taskDetails' })
+    Taro.navigateTo({ url: 'task' })
   }
 
   render () {

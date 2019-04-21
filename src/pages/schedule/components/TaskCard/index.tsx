@@ -28,7 +28,7 @@ export default class TaskCard extends Component<IProps, {}> {
       ...task
     })
     Taro.navigateTo({
-      url: `taskDetails`
+      url: `task`
     })
   }
 
@@ -40,7 +40,7 @@ export default class TaskCard extends Component<IProps, {}> {
       tomatoBonus
     })
     Taro.navigateTo({
-      url: `tomatoClock`
+      url: `clock`
     })
   }
 

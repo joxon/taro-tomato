@@ -5,7 +5,7 @@ import { FontAwesome } from 'taro-icons'
 
 import TOMATO_PNG from './images/tomato.png'
 
-import './tomatoClock.scss'
+import './clock.scss'
 
 interface IProps {
   store: any

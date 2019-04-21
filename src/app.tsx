@@ -38,8 +38,8 @@ class App extends Taro.Component {
     // 所以 @Sincere Xie说的位置往前移动，是可以解决的，只要移动到没有错误的page页面。
     pages: [
       'pages/schedule/index',
-      'pages/schedule/tomatoClock',
-      'pages/schedule/taskDetails',
+      'pages/schedule/clock',
+      'pages/schedule/task',
       'pages/tomato/index',
       'pages/dynamics/index'
     ],

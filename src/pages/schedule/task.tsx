@@ -11,23 +11,21 @@ import { TWeekday, THour, TMinute } from './index.d'
 import { DEFAULT_TASK, WEEKDAYS } from './constants'
 import { parseTimeToNumber } from './utils'
 
-import './taskDetails.scss'
-
 type TPageMode = 'add' | 'edit'
 
 interface IState {
-  mode: TPageMode // taskDetails
+  mode: TPageMode // task
   id?: string // ITask
   name: string // ITask
   weekday: TWeekday // ITask
-  weekdayName: string // taskDetails
-  weekdayIndex: number // taskDetails
+  weekdayName: string // task
+  weekdayIndex: number // task
   startHour: THour // ITask
   startMinute: TMinute // ITask
-  startTime: string // hh:mm, taskDetails
+  startTime: string // hh:mm, task
   endHour: THour // ITask
   endMinute: TMinute // ITask
-  endTime: string // hh:mm, taskDetails
+  endTime: string // hh:mm, task
   tomatoBonus: number // ITask
 }
 
