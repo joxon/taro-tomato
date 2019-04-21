@@ -29,7 +29,7 @@ interface IState {
   tomatoBonus: number // ITask
 }
 
-export default class TaskDetails extends Component<{}, IState> {
+export default class TaskPage extends Component<{}, IState> {
   config: Config = {
     navigationBarTitleText: '任务详情'
   }
@@ -49,7 +49,7 @@ export default class TaskDetails extends Component<{}, IState> {
     tomatoBonus: DEFAULT_TASK.tomatoBonus
   }
 
-  state: IState = TaskDetails.defaultState
+  state: IState = TaskPage.defaultState
 
   componentWillMount () {
     // console.log('params: ')
@@ -83,7 +83,7 @@ export default class TaskDetails extends Component<{}, IState> {
 
   onReset (event: any) {
     console.log(event)
-    this.setState(TaskDetails.defaultState)
+    this.setState(TaskPage.defaultState)
   }
 
   handleNameInput (name: string) {

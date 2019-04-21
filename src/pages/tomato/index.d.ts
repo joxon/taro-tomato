@@ -6,3 +6,8 @@ export interface IRecord {
   reason: string
   timestamp: string
 }
+
+export interface IListItem {
+  name: string
+  tomato: number
+}

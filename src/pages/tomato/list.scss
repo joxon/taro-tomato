@@ -1,0 +1,15 @@
+.list-wrapper {
+  .add-button {
+    position: fixed;
+    float: right;
+    bottom: 30rpx;
+    right: 30rpx;
+
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px #000000a0;
+
+    z-index: 2;
+  }
+}

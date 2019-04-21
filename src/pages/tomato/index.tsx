@@ -1,9 +1,10 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text } from '@tarojs/components'
 import { AtGrid, AtAvatar, AtList, AtListItem, AtSearchBar } from 'taro-ui'
+import { Item } from 'taro-ui/@types/grid'
 
 import { IRecord } from './index.d'
-import { DEFAULT_RECORD_LIST } from './constants'
+import { DEFAULT_RECORDS } from './constants'
 import { toTitleString } from './utils'
 
 import TOMATO_PNG from './images/tomato.png'
@@ -15,14 +16,44 @@ interface IState {
   searchKeyword: string
 }
 
+const gridData: Item[] = [
+  {
+    image: TOMATO_PNG,
+    value: '兑换奖励'
+  },
+  {
+    image: TOMATO_PNG,
+    value: '日常奖惩'
+  }
+]
+
 export default class Tomato extends Component<{}, IState> {
   static defaultState: IState = {
-    records: DEFAULT_RECORD_LIST,
+    records: DEFAULT_RECORDS,
     tomato: 100,
     searchKeyword: ''
   }
 
   state: IState = Tomato.defaultState
+
+  handleGridClick (_item: Item, index: number) {
+    if (index === 0) {
+      this.$preload('mode', 'reward')
+    } else if (index === 1) {
+      this.$preload('mode', 'daily')
+    }
+    Taro.navigateTo({ url: 'list' })
+  }
+
+  // navigateToRewardList () {
+  //   this.$preload('mode', 'reward')
+  //   Taro.navigateTo({ url: 'list' })
+  // }
+
+  // navigateToDailyList () {
+  //   this.$preload('mode', 'daily')
+  //   Taro.navigateTo({ url: 'list' })
+  // }
 
   handleSearchBarChange (value: string) {
     this.setState({
@@ -48,18 +79,10 @@ export default class Tomato extends Component<{}, IState> {
           </View>
           <View className='buttons'>
             <AtGrid
+              onClick={this.handleGridClick}
               mode='rect'
               columnNum={2}
-              data={[
-                {
-                  image: TOMATO_PNG,
-                  value: '兑换奖励'
-                },
-                {
-                  image: TOMATO_PNG,
-                  value: '日常奖惩'
-                }
-              ]}
+              data={gridData}
             />
           </View>
         </View>

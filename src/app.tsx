@@ -41,6 +41,8 @@ class App extends Taro.Component {
       'pages/schedule/clock',
       'pages/schedule/task',
       'pages/tomato/index',
+      'pages/tomato/list',
+      'pages/tomato/item',
       'pages/dynamics/index'
     ],
     tabBar: {
