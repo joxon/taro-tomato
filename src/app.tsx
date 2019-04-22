@@ -43,7 +43,9 @@ class App extends Taro.Component {
       'pages/tomato/index',
       'pages/tomato/list',
       'pages/tomato/item',
-      'pages/dynamics/index'
+      'pages/dynamics/index',
+      'pages/dynamics/settings',
+      'pages/dynamics/class'
     ],
     tabBar: {
       list: [

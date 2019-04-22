@@ -18,8 +18,8 @@ import { WEEKDAYS, DEFAULT_TASK_LIST } from './constants'
 import './index.scss'
 
 enum EViewMode {
-  'TaskView' = 0,
-  'WeekView' = 1
+  'TASK_VIEW' = 0,
+  'WEEK_VIEW' = 1
 }
 
 interface IState {
@@ -28,16 +28,16 @@ interface IState {
   tasks: ITask[]
 }
 
+const TABLIST: ITab[] = [{ title: '日程视图' }, { title: '一周视图' }]
+
 export default class Schedule extends Component<{}, IState> {
   static defaultState: IState = {
     today: 'Mon',
-    viewMode: EViewMode.TaskView,
+    viewMode: EViewMode.TASK_VIEW,
     tasks: DEFAULT_TASK_LIST
   }
 
   state: IState = Schedule.defaultState
-
-  readonly TABLIST: ITab[] = [{ title: '日程视图' }, { title: '一周视图' }]
 
   recentWeekdays: IDay[]
 
@@ -78,17 +78,10 @@ export default class Schedule extends Component<{}, IState> {
     // TODO 获取远端数据
   }
 
-  handleViewSwitching () {
-    const { viewMode } = this.state
-    if (viewMode === EViewMode.TaskView) {
-      this.setState({
-        viewMode: EViewMode.WeekView
-      })
-    } else {
-      this.setState({
-        viewMode: EViewMode.TaskView
-      })
-    }
+  handleViewSwitching (index: number) {
+    this.setState({
+      viewMode: index as EViewMode
+    })
   }
 
   navigateToTaskAdd () {
@@ -104,13 +97,13 @@ export default class Schedule extends Component<{}, IState> {
       <View className='schedule-wrapper'>
         <AtTabs
           current={viewMode}
-          tabList={this.TABLIST}
+          tabList={TABLIST}
           onClick={this.handleViewSwitching}
         >
-          <AtTabsPane current={viewMode} index={0}>
+          <AtTabsPane current={viewMode} index={EViewMode.TASK_VIEW}>
             <TaskView tasks={tasks} recentWeekdays={recentWeekdays} />
           </AtTabsPane>
-          <AtTabsPane current={viewMode} index={1}>
+          <AtTabsPane current={viewMode} index={EViewMode.WEEK_VIEW}>
             <WeekView tasks={tasks} recentWeekdays={recentWeekdays} />
           </AtTabsPane>
         </AtTabs>

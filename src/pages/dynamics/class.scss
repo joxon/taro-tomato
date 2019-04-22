@@ -1,0 +1,38 @@
+.class-wrapper {
+  .container {
+    background-color: white;
+    margin: 20rpx 20rpx;
+    padding: 10rpx 10rpx;
+    border-radius: 50rpx;
+  }
+
+  .top-view {
+    text-align: center;
+    color: #333;
+
+    .share-button {
+      position: absolute;
+      right: 50rpx;
+    }
+
+    .avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .text {
+      margin: 20rpx 0;
+
+      .name {
+        color: #333;
+        font-size: 36rpx;
+      }
+
+      .id {
+        color: #999;
+        font-size: 28rpx;
+      }
+    }
+  }
+}
